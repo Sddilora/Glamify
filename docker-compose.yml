@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+
+  ecommerce-db:
+    restart: always
+    image: "postgres:15.0-alpine"
+    container_name: ecommerce-db
+    ports:
+      - "5432:5432" 
+    environment:
+      - POSTGRES_DB=ecommerce
+      - POSTGRES_USER=ecommerce
+      - POSTGRES_PASSWORD=ecommerce
+
+  ecommerce-backend:
+    # image: 'docker-spring-boot-postgres:latest'  
+    build: ./backend
+    container_name: ecommerce-backend
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://ecommerce-db:5432/ecommerce
+      - SPRING_DATASOURCE_USERNAME=ecommerce
+      - SPRING_DATASOURCE_PASSWORD=ecommerce
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SERVER_PORT=8191
+    ports:
+      - "8191:8191"
+    depends_on:
+      - ecommerce-db
+    links:
+      - ecommerce-db
+
+  ecommerce-frontend:
+    build: ./frontend
+    container_name: ecommerce-frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - ecommerce-db
+    links:
+      - ecommerce-backend
