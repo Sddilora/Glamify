@@ -2,18 +2,23 @@ package com.sd.ecommerce.model;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.sd.ecommerce.model.Base.SoftDeletableEntity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
+// @Data
+// @EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @Entity
 @Table(name = "product")
+@NoArgsConstructor // This is a default (no-argument) constructor that initializes the object. It calls the constructor of the superclass (SoftDeletableEntity) using super(), which is important for proper inheritance. But we don't need this constructor because we have another constructor with all parameters. Which is @Data annotation.
 public class Product extends SoftDeletableEntity {
 
     @NotNull(message = "Product name is required.")
@@ -26,23 +31,22 @@ public class Product extends SoftDeletableEntity {
 
     private String description;
 
-    public Product(Long id, @NotNull(message = "Product name is required.") String name, double price, String photoUrl, String description) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.photoUrl = photoUrl;
-        this.description = description;
-    }
-
-    // This is required for the @Data annotation to work
-    public Product() {
-    }
-
     // private String sku; // Stock Keeping Unit
 
-    // private long categoryId;
+    // Category_id is coming from the ProductCategory table. So we nood to add the relationship between Product and ProductCategory.
+    // @JoinColumn(name = "category_id") // This is the foreign key
+    @ManyToOne // One product can have one category. But one category can have many products.
+    private ProductCategory categoryId;
 
     // private long inventoryId;
 
     // private long discountId;
+
+    public Product(@NotNull(message = "Product name is required.") String name, double price, String photoUrl, String description, ProductCategory categoryId) {
+        this.name = name;
+        this.price = price;
+        this.photoUrl = photoUrl;
+        this.description = description;
+        this.categoryId = categoryId;
+    }
 }

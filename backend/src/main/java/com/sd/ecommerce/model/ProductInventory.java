@@ -9,4 +9,7 @@ import com.sd.ecommerce.model.Base.SoftDeletableEntity;
 @Table(name = "product_inventory")
 public class ProductInventory extends SoftDeletableEntity{
 
+    // quantity
+    private int quantity;
+
 }

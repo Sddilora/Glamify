@@ -1,5 +1,6 @@
 package com.sd.ecommerce.model.Base;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -8,22 +9,20 @@ import javax.persistence.MappedSuperclass;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import lombok.Data;
+import lombok.Setter;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
-@EqualsAndHashCode(callSuper = true) // to avoid the error: java.lang.StackOverflowError: null
-@NoArgsConstructor
+// @Data
+// @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true) // to avoid the error: java.lang.StackOverflowError: null 
+@Getter
+@Setter
 @MappedSuperclass
 @SQLDelete(sql = "UPDATE ${table} SET deleted_at=now() WHERE id=?")
 @Where(clause = "deleted_at IS NULL")
-public class SoftDeletableEntity extends BaseEntity{
+public class SoftDeletableEntity extends BaseEntityAudit  implements Serializable{
 
-    public SoftDeletableEntity(Long id) {
-        super(id);
-    }
-    
     @Column(name = "deleted_at")
     private Timestamp deletedAt;
 }
