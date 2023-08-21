@@ -1,13 +1,9 @@
 package com.sd.ecommerce.model;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 import javax.persistence.*;
 
 import com.sd.ecommerce.model.Base.BaseEntity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

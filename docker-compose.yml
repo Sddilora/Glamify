@@ -24,7 +24,7 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SERVER_PORT=8191
     ports:
-      - "8191:8191"
+      - "8191:8191" # the first port is the port on the host machine, the second is the port in the container
     depends_on:
       - ecommerce-db
     links:

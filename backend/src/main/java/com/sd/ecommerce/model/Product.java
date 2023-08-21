@@ -6,6 +6,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sd.ecommerce.model.Base.SoftDeletableEntity;
 
 import lombok.Getter;
@@ -19,6 +23,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "product")
 @NoArgsConstructor // This is a default (no-argument) constructor that initializes the object. It calls the constructor of the superclass (SoftDeletableEntity) using super(), which is important for proper inheritance. But we don't need this constructor because we have another constructor with all parameters. Which is @Data annotation.
+@SQLDelete(sql = "UPDATE product SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class Product extends SoftDeletableEntity {
 
     @NotNull(message = "Product name is required.")

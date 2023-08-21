@@ -2,7 +2,6 @@ package com.sd.ecommerce.service.implementation;
 
 import java.util.Collection;
 
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,14 +28,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product get(long id) {
+    public Product get(Long id) {
         log.info("Fetching Product {}", id);
         return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
     }
 
     @Override
-    public Product update(long id, Product product) {
-        log.info("Updating Product {} with {}", id, product);
+    public Product update(Long id, Product product) {
+        log.info("Updating Product {} with {}", id, product.toString());
         Product existingProduct = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         existingProduct.setName(product.getName());
         existingProduct.setPrice(product.getPrice());
@@ -46,12 +45,18 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product delete(long id) {
+    public Product delete(Long id) {
         log.info("Deleting Product {}", id);
         Product existingProduct = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
-        productRepository.delete(existingProduct);
+        // existingProduct.setDeletedAt(timeStamp(now()));
+        // return productRepository.save(existingProduct);
+        productRepository.deleteById(id);
         return existingProduct;
     }
+
+    // private Timestamp timeStamp(LocalDateTime now) {
+    //     return null;
+    // }
 
     @Override
     public Collection<Product> list() {
@@ -61,26 +66,3 @@ public class ProductServiceImpl implements ProductService {
 
 
 }
-
-//// Ex version
-    // private ProductRepository productRepository;
-
-    // @Autowired // This annotation tells Spring to inject an instance of ProductRepository here. This is called dependency injection.
-    // public ProductServiceImpl(ProductRepository productRepository) {
-    //     this.productRepository = productRepository;
-    // }
-
-    // @Override
-    // public Iterable<Product> getAllProducts() {
-    //     return productRepository.findAll();
-    // }
-
-    // @Override
-    // public Product getProduct(long id) {
-    //     return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
-    // }
-
-    // @Override
-    // public Product save(Product product) {
-    //     return productRepository.save(product);
-    // }

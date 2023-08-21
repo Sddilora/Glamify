@@ -1,18 +1,11 @@
 package com.sd.ecommerce.model.Base;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Objects;
-import java.util.UUID;
-
-import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Getter;
 import lombok.Setter;
