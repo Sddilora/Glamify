@@ -1,5 +1,7 @@
 # Glamify
 
+![Logo](https://i.imgur.com/hQHDeiF.png)
+
 A web application built with Spring Boot and Angular, deployed using Docker Compose.
 
 ## Table of Contents
