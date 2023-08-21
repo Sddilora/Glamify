@@ -29,9 +29,6 @@ This project is a web application that combines the backend functionality of Spr
 Before you begin, ensure you have the following:
 
 - Docker: [Install Docker](https://docs.docker.com/get-docker/)
-- Docker Compose: [Install Docker Compose](https://docs.docker.com/compose/install/)
-- Java Development Kit (JDK): [Download JDK](https://www.oracle.com/java/technologies/javase-downloads.html)
-- Node.js and npm: [Install Node.js and npm](https://nodejs.org/)
 
 ## Getting Started
 

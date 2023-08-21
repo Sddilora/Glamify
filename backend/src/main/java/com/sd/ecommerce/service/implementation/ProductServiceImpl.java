@@ -41,6 +41,9 @@ public class ProductServiceImpl implements ProductService {
         existingProduct.setPrice(product.getPrice());
         existingProduct.setPhotoUrl(product.getPhotoUrl());
         existingProduct.setDescription(product.getDescription());
+        existingProduct.setCategoryId(product.getCategoryId());
+        existingProduct.setInventoryId(product.getInventoryId());
+        existingProduct.setDiscountId(product.getDiscountId());
         return productRepository.save(existingProduct);
     }
 
@@ -48,15 +51,9 @@ public class ProductServiceImpl implements ProductService {
     public Product delete(Long id) {
         log.info("Deleting Product {}", id);
         Product existingProduct = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found"));
-        // existingProduct.setDeletedAt(timeStamp(now()));
-        // return productRepository.save(existingProduct);
         productRepository.deleteById(id);
         return existingProduct;
     }
-
-    // private Timestamp timeStamp(LocalDateTime now) {
-    //     return null;
-    // }
 
     @Override
     public Collection<Product> list() {

@@ -5,16 +5,15 @@ import javax.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sd.ecommerce.model.Product;
+import com.sd.ecommerce.model.ProductCategory;
 import com.sd.ecommerce.model.Response;
-import com.sd.ecommerce.service.ProductService;
+import com.sd.ecommerce.service.ProductCategoryService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,21 +22,20 @@ import static org.springframework.http.HttpStatus.OK;
 
 import java.util.Map;
 
-
-@RestController // This means that this class is a Controller and will be used to create RESTful endpoints.
-@RequestMapping("/product")
-@RequiredArgsConstructor // This means that Spring will generate a constructor with all the required fields.
-public class ProductController {
+@RestController
+@RequestMapping("/category")
+@RequiredArgsConstructor
+public class ProductCategoryController {
     
-    private final ProductService productService;
+    private final ProductCategoryService productCategoryService;
 
     @PostMapping("/create")
-    public ResponseEntity<Response> createProduct(@RequestBody @NotNull Product product) {
+    public ResponseEntity<Response> createProductCategory(@RequestBody @NotNull ProductCategory productCategory) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("product", productService.save(product)))
-            .message("Product created")
+            .data(Map.of("productCategory", productCategoryService.save(productCategory)))
+            .message("Product Category created")
             .status(OK)
             .statusCode(OK.value())
             .build()
@@ -45,12 +43,12 @@ public class ProductController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Response> listProducts() {
+    public ResponseEntity<Response> listProductCategories() {
     return ResponseEntity.ok(
         Response.builder()
         .timeStamp(now())
-        .data(Map.of("products", productService.list()))
-        .message("Products retrieved")
+        .data(Map.of("productCategories", productCategoryService.list()))
+        .message("Product Categories retrieved")
         .status(OK)
         .statusCode(OK.value())
         .build()
@@ -58,12 +56,12 @@ public class ProductController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getProduct(@PathVariable Long id) {
+    public ResponseEntity<Response> getProductCategory(@NotNull Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("product", productService.get(id)))
-            .message("Product retrieved")
+            .data(Map.of("productCategory", productCategoryService.get(id)))
+            .message("Product Category retrieved")
             .status(OK)
             .statusCode(OK.value())
             .build()
@@ -71,12 +69,12 @@ public class ProductController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Response> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+    public ResponseEntity<Response> updateProductCategory(@NotNull Long id, @RequestBody @NotNull ProductCategory productCategory) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("product", productService.update(id, product)))
-            .message("Product updated")
+            .data(Map.of("productCategory", productCategoryService.update(id, productCategory)))
+            .message("Product Category updated")
             .status(OK)
             .statusCode(OK.value())
             .build()
@@ -84,12 +82,12 @@ public class ProductController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<Response> deleteProductCategory(@NotNull Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("product", productService.delete(id)))
-            .message("Product deleted")
+            .data(Map.of("productCategory", productCategoryService.delete(id)))
+            .message("Product Category deleted")
             .status(OK)
             .statusCode(OK.value())
             .build()
