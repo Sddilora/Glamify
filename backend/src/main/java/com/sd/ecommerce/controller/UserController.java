@@ -16,26 +16,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sd.ecommerce.model.ProductCategory;
-import com.sd.ecommerce.service.implementation.ProductCategoryServiceImpl;
+import com.sd.ecommerce.model.User;
+import com.sd.ecommerce.service.implementation.UserServiceImpl;
 import com.sd.ecommerce.util.Response;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/user")
 @RequiredArgsConstructor
-public class ProductCategoryController {
-    
-    private final ProductCategoryServiceImpl productCategoryService;
+public class UserController {
+
+    private final UserServiceImpl userService;
 
     @PostMapping("/create")
-    public ResponseEntity<Response> createProductCategory(@RequestBody @NotNull ProductCategory productCategory) {
+    public ResponseEntity<Response> createUser(@RequestBody @NotNull User user) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.save(productCategory)))
-            .message("Product Category created")
+            .data(Map.of("user", userService.save(user)))
+            .message("User created")
             .status(OK)
             .statusCode(OK.value())
             .build()
@@ -43,12 +43,12 @@ public class ProductCategoryController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Response> listProductCategories() {
+    public ResponseEntity<Response> listUsers() {
     return ResponseEntity.ok(
         Response.builder()
         .timeStamp(now())
-        .data(Map.of("productCategories", productCategoryService.list()))
-        .message("Product Categories retrieved")
+        .data(Map.of("users", userService.list()))
+        .message("Users retrieved")
         .status(OK)
         .statusCode(OK.value())
         .build()
@@ -56,12 +56,12 @@ public class ProductCategoryController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getProductCategory(@NotNull Long id) {
+    public ResponseEntity<Response> getUser(@NotNull Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.get(id)))
-            .message("Product Category retrieved")
+            .data(Map.of("user", userService.get(id)))
+            .message("User retrieved")
             .status(OK)
             .statusCode(OK.value())
             .build()
@@ -69,12 +69,12 @@ public class ProductCategoryController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Response> updateProductCategory(@NotNull Long id, @RequestBody @NotNull ProductCategory productCategory) {
+    public ResponseEntity<Response> updateUser(@NotNull Long id, @RequestBody @NotNull User user) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.update(id, productCategory)))
-            .message("Product Category updated")
+            .data(Map.of("user", userService.update(id, user)))
+            .message("User updated")
             .status(OK)
             .statusCode(OK.value())
             .build()
@@ -82,15 +82,16 @@ public class ProductCategoryController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteProductCategory(@NotNull Long id) {
+    public ResponseEntity<Response> deleteUser(@NotNull Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.delete(id)))
-            .message("Product Category deleted")
+            .data(Map.of("user", userService.delete(id)))
+            .message("User deleted")
             .status(OK)
             .statusCode(OK.value())
             .build()
         );
     }
+    
 }

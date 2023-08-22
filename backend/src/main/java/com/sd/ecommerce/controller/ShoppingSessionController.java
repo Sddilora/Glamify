@@ -16,26 +16,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sd.ecommerce.model.ProductCategory;
-import com.sd.ecommerce.service.implementation.ProductCategoryServiceImpl;
+import com.sd.ecommerce.model.ShoppingSession;
+import com.sd.ecommerce.service.implementation.ShoppingSessionServiceImpl;
 import com.sd.ecommerce.util.Response;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/shopping-session")
 @RequiredArgsConstructor
-public class ProductCategoryController {
+public class ShoppingSessionController {
     
-    private final ProductCategoryServiceImpl productCategoryService;
+    private final ShoppingSessionServiceImpl shoppingSessionService;
 
     @PostMapping("/create")
-    public ResponseEntity<Response> createProductCategory(@RequestBody @NotNull ProductCategory productCategory) {
+    public ResponseEntity<Response> createShoppingSession(@RequestBody @NotNull ShoppingSession shoppingSession) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.save(productCategory)))
-            .message("Product Category created")
+            .data(Map.of("shoppingSession", shoppingSessionService.save(shoppingSession)))
+            .message("Shopping Session created")
             .status(OK)
             .statusCode(OK.value())
             .build()
@@ -43,12 +43,12 @@ public class ProductCategoryController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Response> listProductCategories() {
+    public ResponseEntity<Response> listShoppingSessions() {
     return ResponseEntity.ok(
         Response.builder()
         .timeStamp(now())
-        .data(Map.of("productCategories", productCategoryService.list()))
-        .message("Product Categories retrieved")
+        .data(Map.of("shoppingSessions", shoppingSessionService.list()))
+        .message("Shopping Sessions retrieved")
         .status(OK)
         .statusCode(OK.value())
         .build()
@@ -56,12 +56,12 @@ public class ProductCategoryController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getProductCategory(@NotNull Long id) {
+    public ResponseEntity<Response> getShoppingSession(@NotNull Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.get(id)))
-            .message("Product Category retrieved")
+            .data(Map.of("shoppingSession", shoppingSessionService.get(id)))
+            .message("Shopping Session retrieved")
             .status(OK)
             .statusCode(OK.value())
             .build()
@@ -69,12 +69,12 @@ public class ProductCategoryController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Response> updateProductCategory(@NotNull Long id, @RequestBody @NotNull ProductCategory productCategory) {
+    public ResponseEntity<Response> updateShoppingSession(@NotNull Long id, @RequestBody @NotNull ShoppingSession shoppingSession) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.update(id, productCategory)))
-            .message("Product Category updated")
+            .data(Map.of("shoppingSession", shoppingSessionService.update(id, shoppingSession)))
+            .message("Shopping Session updated")
             .status(OK)
             .statusCode(OK.value())
             .build()
@@ -82,15 +82,16 @@ public class ProductCategoryController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteProductCategory(@NotNull Long id) {
+    public ResponseEntity<Response> deleteShoppingSession(@NotNull Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.delete(id)))
-            .message("Product Category deleted")
+            .data(Map.of("shoppingSession", shoppingSessionService.delete(id)))
+            .message("Shopping Session deleted")
             .status(OK)
             .statusCode(OK.value())
             .build()
         );
     }
+
 }

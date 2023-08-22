@@ -16,26 +16,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sd.ecommerce.model.ProductCategory;
-import com.sd.ecommerce.service.implementation.ProductCategoryServiceImpl;
+import com.sd.ecommerce.model.ProductInventory;
+import com.sd.ecommerce.service.implementation.ProductInventoryServiceImpl;
 import com.sd.ecommerce.util.Response;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/inventory")
 @RequiredArgsConstructor
-public class ProductCategoryController {
+public class ProductInventoryController {
     
-    private final ProductCategoryServiceImpl productCategoryService;
+    private final ProductInventoryServiceImpl productInventoryService;
 
     @PostMapping("/create")
-    public ResponseEntity<Response> createProductCategory(@RequestBody @NotNull ProductCategory productCategory) {
+    public ResponseEntity<Response> createProductInventory(@RequestBody @NotNull ProductInventory productInventory) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.save(productCategory)))
-            .message("Product Category created")
+            .data(Map.of("productInventory", productInventoryService.save(productInventory)))
+            .message("Product Inventory created")
             .status(OK)
             .statusCode(OK.value())
             .build()
@@ -43,25 +43,25 @@ public class ProductCategoryController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Response> listProductCategories() {
+    public ResponseEntity<Response> listProductInventories() {
     return ResponseEntity.ok(
         Response.builder()
         .timeStamp(now())
-        .data(Map.of("productCategories", productCategoryService.list()))
-        .message("Product Categories retrieved")
+        .data(Map.of("productInventories", productInventoryService.list()))
+        .message("Product Inventories retrieved")
         .status(OK)
         .statusCode(OK.value())
         .build()
     );
     }
-
+    
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getProductCategory(@NotNull Long id) {
+    public ResponseEntity<Response> getProductInventory(@NotNull Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.get(id)))
-            .message("Product Category retrieved")
+            .data(Map.of("productInventory", productInventoryService.get(id)))
+            .message("Product Inventory retrieved")
             .status(OK)
             .statusCode(OK.value())
             .build()
@@ -69,12 +69,12 @@ public class ProductCategoryController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Response> updateProductCategory(@NotNull Long id, @RequestBody @NotNull ProductCategory productCategory) {
+    public ResponseEntity<Response> updateProductInventory(@NotNull Long id, @RequestBody @NotNull ProductInventory productInventory) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.update(id, productCategory)))
-            .message("Product Category updated")
+            .data(Map.of("productInventory", productInventoryService.update(id, productInventory)))
+            .message("Product Inventory updated")
             .status(OK)
             .statusCode(OK.value())
             .build()
@@ -82,12 +82,12 @@ public class ProductCategoryController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteProductCategory(@NotNull Long id) {
+    public ResponseEntity<Response> deleteProductInventory(@NotNull Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.delete(id)))
-            .message("Product Category deleted")
+            .data(Map.of("productInventory", productInventoryService.delete(id)))
+            .message("Product Inventory deleted")
             .status(OK)
             .statusCode(OK.value())
             .build()

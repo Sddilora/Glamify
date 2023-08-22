@@ -1,5 +1,10 @@
 package com.sd.ecommerce.controller;
 
+import static java.time.LocalDateTime.now;
+import static org.springframework.http.HttpStatus.OK;
+
+import java.util.Map;
+
 import javax.validation.constraints.NotNull;
 
 import org.springframework.http.ResponseEntity;
@@ -13,15 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sd.ecommerce.model.Product;
-import com.sd.ecommerce.model.Response;
-import com.sd.ecommerce.service.ProductService;
+import com.sd.ecommerce.service.implementation.ProductServiceImpl;
+import com.sd.ecommerce.util.Response;
 
 import lombok.RequiredArgsConstructor;
-
-import static java.time.LocalDateTime.now;
-import static org.springframework.http.HttpStatus.OK;
-
-import java.util.Map;
 
 
 @RestController // This means that this class is a Controller and will be used to create RESTful endpoints.
@@ -29,7 +29,7 @@ import java.util.Map;
 @RequiredArgsConstructor // This means that Spring will generate a constructor with all the required fields.
 public class ProductController {
     
-    private final ProductService productService;
+    private final ProductServiceImpl productService;
 
     @PostMapping("/create")
     public ResponseEntity<Response> createProduct(@RequestBody @NotNull Product product) {

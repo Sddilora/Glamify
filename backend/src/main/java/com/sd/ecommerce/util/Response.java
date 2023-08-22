@@ -1,4 +1,4 @@
-package com.sd.ecommerce.model;
+package com.sd.ecommerce.util;
 
 import java.time.LocalDateTime;
 import java.util.Map;

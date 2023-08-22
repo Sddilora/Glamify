@@ -14,8 +14,7 @@ import com.sd.ecommerce.model.Discount;
 import com.sd.ecommerce.model.Product;
 import com.sd.ecommerce.model.ProductCategory;
 import com.sd.ecommerce.model.ProductInventory;
-import com.sd.ecommerce.service.ProductCategoryService;
-import com.sd.ecommerce.service.ProductService;
+import com.sd.ecommerce.service.BaseService;
 
 @SpringBootApplication
 public class EcommerceApplication {
@@ -35,7 +34,7 @@ public class EcommerceApplication {
 	}
 
 	@Bean
-	CommandLineRunner runner( ProductService productService , ProductCategoryService productCategoryService) {
+	CommandLineRunner runner( BaseService<Product> productService , BaseService<ProductCategory> productCategoryService) { 
 		return args -> {
 			productCategoryService.save(productCategory);
 			productCategoryService.save(productCategory2);
