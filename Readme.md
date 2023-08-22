@@ -71,5 +71,4 @@ Contributions are welcome! Please follow these guidelines:
 
 ## License
 
-I still don't know what to put here.
-Maybe someday I'll figure it out and one day I will have my own license too .
+MIT License.
