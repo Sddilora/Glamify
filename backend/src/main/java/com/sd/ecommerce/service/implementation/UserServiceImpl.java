@@ -7,7 +7,7 @@ import java.util.Collection;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sd.ecommerce.dto.UserDTO;
+import com.sd.ecommerce.dto.UserDto;
 import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.User;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +22,20 @@ public class UserServiceImpl implements BaseService<User>{
     private final UserRepository userRepository;
 
     @Override
-    public User save(User user) {
+    public User save(UserDto userDto) {
         log.info("Saving new User {} to the database", user.getId());
-        return userRepository.save(user);
+        User userModel = new User();
+        if (userDto.GetUserName().Length()>32 {
+            //Create an error
+        }
+        if (userDto.GetPassword().Length()<8 {
+            //Create an error
+        }
+        userModel.setUserName(userDto.GetUserName());
+        ...
+        User dbUserModel =userRepository.save(userModel);
+        userDto.SetUserName(dbUserModel.GetUserName());
+            return userDto;
     }
 
     @Override
@@ -34,7 +45,7 @@ public class UserServiceImpl implements BaseService<User>{
     }
 
     @Override
-    public User update(Long id, User user) {
+    public User update(Long id, UserDto userDto) {
         log.info("Updating User {} with {}", id, user.toString());
         User existingUser = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found"));
         existingUser.setUserName(user.getUserName());
