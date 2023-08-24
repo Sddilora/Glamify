@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sd.ecommerce.model.User;
+import com.sd.ecommerce.dto.UserDto;
 import com.sd.ecommerce.service.implementation.UserServiceImpl;
 import com.sd.ecommerce.util.Response;
 
@@ -30,7 +30,7 @@ public class UserController {
     private final UserServiceImpl userService;
 
     @PostMapping("/create")
-    public ResponseEntity<Response> createUser(@RequestBody @NotNull User user) {
+    public ResponseEntity<Response> createUser(@RequestBody @NotNull UserDto user) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
@@ -69,7 +69,7 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Response> updateUser(@NotNull Long id, @RequestBody @NotNull User user) {
+    public ResponseEntity<Response> updateUser(@NotNull Long id, @RequestBody @NotNull UserDto user) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
