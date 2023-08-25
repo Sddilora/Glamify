@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sd.ecommerce.dto.UserRegistrationDTO;
-import com.sd.ecommerce.dto.Mapper.UserMapper;
-import com.sd.ecommerce.model.User;
-import com.sd.ecommerce.service.implementation.UserServiceImpl;
+import com.sd.ecommerce.service.UserService;
 import com.sd.ecommerce.util.Response;
 
 import lombok.RequiredArgsConstructor;
@@ -29,18 +27,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserServiceImpl userService;
-    private final UserMapper UserMapper;
+    private final UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<Response> registerUser(@RequestBody UserRegistrationDTO UserRegistrationDTO) {
 
-        User user = userService.save(UserMapper.convertToEntity(UserRegistrationDTO)); // Convert DTO to entity
+        UserRegistrationDTO user = userService.save(UserRegistrationDTO); // Convert DTO to entity
 
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("user", UserMapper.convertUserToDTO(user)))
+            .data(Map.of("user", user))
             .message("User registered")
             .status(OK)
             .statusCode(OK.value())
@@ -67,7 +64,7 @@ public class UserController {
     return ResponseEntity.ok(
         Response.builder()
         .timeStamp(now())
-        .data(Map.of("users", UserMapper.convertUsersToDTOs(userService.list())))
+        .data(Map.of("users", userService.list()))
         .message("Users retrieved")
         .status(OK)
         .statusCode(OK.value())
@@ -80,7 +77,7 @@ public class UserController {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("user", UserMapper.convertUserToDTO(userService.get(id))))
+            .data(Map.of("user", userService.get(id)))
             .message("User retrieved")
             .status(OK)
             .statusCode(OK.value())
@@ -89,11 +86,11 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Response> updateUser(@PathVariable("id") Long id, @RequestBody @NotNull User user) {
+    public ResponseEntity<Response> updateUser(@PathVariable("id") Long id, @RequestBody @NotNull UserRegistrationDTO UserRegistrationDTO) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("user",UserMapper.convertUserToDTO(userService.update(id, user))))
+            .data(Map.of("user", userService.update(id, UserRegistrationDTO)))
             .message("User updated")
             .status(OK)
             .statusCode(OK.value())
@@ -106,7 +103,7 @@ public class UserController {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("user", UserMapper.convertUserToDTO(userService.delete(id))))
+            .data(Map.of("user", userService.delete(id)))
             .message("User deleted")
             .status(OK)
             .statusCode(OK.value())
