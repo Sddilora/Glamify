@@ -1,15 +1,12 @@
 package com.sd.ecommerce.model;
 
 import java.time.LocalDate;
-import java.util.List;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class UserPayment {
@@ -23,7 +20,7 @@ public class UserPayment {
     // @OneToMany(mappedBy = "userPayment", cascade = CascadeType.ALL) // Define the one-to-many relationship
     // private List<UserPayment> paymentMethods; // Use a collection type for payment methods
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     private String paymentType;

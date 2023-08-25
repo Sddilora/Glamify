@@ -26,7 +26,7 @@ public class User extends BaseEntity{
     private String lastName;
     private String phone;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name="user_user_address", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="user_address_id"))
     private List<UserAddress> userAddresses = new ArrayList<>();
 
@@ -45,4 +45,5 @@ public class User extends BaseEntity{
         this.phone = phone;
         this.userAddresses = userAddresses;
     }
+
 }

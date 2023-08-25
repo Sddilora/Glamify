@@ -27,6 +27,7 @@ public class UserAddress {
     private String country;
     private String postalCode;
     
-    @ManyToMany(mappedBy = "userAddresses")
+    @ManyToMany(mappedBy = "userAddresses", fetch = javax.persistence.FetchType.LAZY)
     private List<User> users = new ArrayList<>();
+
 }
