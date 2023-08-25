@@ -45,7 +45,7 @@ public class Product extends SoftDeletableEntity {
 
     // Category_id is coming from the ProductCategory table. So we nood to add the relationship between Product and ProductCategory.
     @JoinColumn(name = "category_id") // This is the foreign key
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnore // This is to avoid infinite loop when we get the product list. Because we are getting the category list from the product list and the product list from the category list.
     private ProductCategory categoryId;
 
@@ -54,7 +54,7 @@ public class Product extends SoftDeletableEntity {
     private ProductInventory inventoryId;
 
     @JoinColumn(name = "discount_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnore
     private Discount discountId;
 

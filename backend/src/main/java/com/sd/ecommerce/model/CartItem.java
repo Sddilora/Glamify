@@ -1,9 +1,7 @@
 package com.sd.ecommerce.model;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -20,7 +18,7 @@ import lombok.Setter;
 @Table(name = "cart_item")
 public class CartItem extends BaseEntity{
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ShoppingSession shoppingSession;
 
     @OneToOne(cascade = CascadeType.ALL)

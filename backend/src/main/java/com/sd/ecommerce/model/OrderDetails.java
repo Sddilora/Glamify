@@ -19,7 +19,7 @@ import lombok.Setter;
 @Table(name = "order_details")
 public class OrderDetails extends BaseEntity{
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne 
     private User user;
 
     private float total;
