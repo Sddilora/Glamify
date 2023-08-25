@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,7 +57,7 @@ public class ProductCategoryController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getProductCategory(@NotNull Long id) {
+    public ResponseEntity<Response> getProductCategory(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
@@ -69,7 +70,7 @@ public class ProductCategoryController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Response> updateProductCategory(@NotNull Long id, @RequestBody @NotNull ProductCategory productCategory) {
+    public ResponseEntity<Response> updateProductCategory(@PathVariable("id") Long id, @RequestBody @NotNull ProductCategory productCategory) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
@@ -82,7 +83,7 @@ public class ProductCategoryController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteProductCategory(@NotNull Long id) {
+    public ResponseEntity<Response> deleteProductCategory(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())

@@ -58,7 +58,7 @@ public class ProductController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getProduct(@PathVariable Long id) {
+    public ResponseEntity<Response> getProduct(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())

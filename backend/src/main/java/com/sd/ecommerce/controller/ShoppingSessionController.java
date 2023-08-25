@@ -7,16 +7,21 @@ import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.ShoppingSession;
+import com.sd.ecommerce.model.User;
+import com.sd.ecommerce.repository.UserRepository;
 import com.sd.ecommerce.service.implementation.ShoppingSessionServiceImpl;
 import com.sd.ecommerce.util.Response;
 
@@ -28,19 +33,43 @@ import lombok.RequiredArgsConstructor;
 public class ShoppingSessionController {
     
     private final ShoppingSessionServiceImpl shoppingSessionService;
+    private final UserRepository UserRepository;
 
     @PostMapping("/create")
-    public ResponseEntity<Response> createShoppingSession(@RequestBody @NotNull ShoppingSession shoppingSession) {
+    public ResponseEntity<Response> createShoppingSession(@RequestBody ShoppingSession shoppingSession) {
+        
+        Long userId = shoppingSession.getUser().getId();
+
+        if (userId == null) {
+            return ResponseEntity.badRequest().body(
+                Response.builder()
+                    .timeStamp(now())
+                    .message("User ID is required for creating a Shopping Session")
+                    .status(HttpStatus.BAD_REQUEST)
+                    .statusCode(HttpStatus.BAD_REQUEST.value())
+                    .build()
+            );
+        }
+
+        User user = UserRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User with provided ID not found"));
+        
+        ShoppingSession newShoppingSession = new ShoppingSession();
+        newShoppingSession.setUser(user);
+        newShoppingSession.setTotal(shoppingSession.getTotal());
+
+        ShoppingSession createdSession = shoppingSessionService.save(newShoppingSession);
+
         return ResponseEntity.ok(
             Response.builder()
-            .timeStamp(now())
-            .data(Map.of("shoppingSession", shoppingSessionService.save(shoppingSession)))
-            .message("Shopping Session created")
-            .status(OK)
-            .statusCode(OK.value())
-            .build()
+                .timeStamp(now())
+                .data(Map.of("shoppingSession", createdSession))
+                .message("Shopping Session created")
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
+                .build()
         );
     }
+
 
     @GetMapping("/list")
     public ResponseEntity<Response> listShoppingSessions() {
@@ -56,7 +85,7 @@ public class ShoppingSessionController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getShoppingSession(@NotNull Long id) {
+    public ResponseEntity<Response> getShoppingSession(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
@@ -69,7 +98,7 @@ public class ShoppingSessionController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Response> updateShoppingSession(@NotNull Long id, @RequestBody @NotNull ShoppingSession shoppingSession) {
+    public ResponseEntity<Response> updateShoppingSession(@PathVariable("id") Long id, @RequestBody @NotNull ShoppingSession shoppingSession) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
@@ -82,7 +111,7 @@ public class ShoppingSessionController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteShoppingSession(@NotNull Long id) {
+    public ResponseEntity<Response> deleteShoppingSession(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())

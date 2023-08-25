@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,7 +57,7 @@ public class ProductInventoryController {
     }
     
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getProductInventory(@NotNull Long id) {
+    public ResponseEntity<Response> getProductInventory(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
@@ -69,7 +70,7 @@ public class ProductInventoryController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Response> updateProductInventory(@NotNull Long id, @RequestBody @NotNull ProductInventory productInventory) {
+    public ResponseEntity<Response> updateProductInventory(@PathVariable("id") Long id, @RequestBody @NotNull ProductInventory productInventory) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
@@ -82,7 +83,7 @@ public class ProductInventoryController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteProductInventory(@NotNull Long id) {
+    public ResponseEntity<Response> deleteProductInventory(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
