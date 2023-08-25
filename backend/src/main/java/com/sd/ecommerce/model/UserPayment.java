@@ -12,10 +12,7 @@ public class UserPayment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    // @OneToMany
-    // private User user;
-
+    
     // @OneToMany(mappedBy = "userPayment", cascade = CascadeType.ALL) // Define the one-to-many relationship
     // private List<UserPayment> paymentMethods; // Use a collection type for payment methods
 

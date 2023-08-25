@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sd.ecommerce.model.ProductInventory;
-import com.sd.ecommerce.service.implementation.ProductInventoryServiceImpl;
+import com.sd.ecommerce.service.ProductInventoryService;
 import com.sd.ecommerce.util.Response;
 
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductInventoryController {
     
-    private final ProductInventoryServiceImpl productInventoryService;
+    private final ProductInventoryService productInventoryService;
 
     @PostMapping("/create")
     public ResponseEntity<Response> createProductInventory(@RequestBody @NotNull ProductInventory productInventory) {

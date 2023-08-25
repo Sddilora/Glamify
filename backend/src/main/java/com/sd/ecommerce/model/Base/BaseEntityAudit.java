@@ -1,6 +1,5 @@
 package com.sd.ecommerce.model.Base;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -16,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class BaseEntityAudit extends BaseEntity implements Serializable{
+public abstract class BaseEntityAudit extends BaseEntity{
 
     @CreationTimestamp
     @Column(updatable = false)

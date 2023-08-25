@@ -22,7 +22,7 @@ import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.ShoppingSession;
 import com.sd.ecommerce.model.User;
 import com.sd.ecommerce.repository.UserRepository;
-import com.sd.ecommerce.service.implementation.ShoppingSessionServiceImpl;
+import com.sd.ecommerce.service.ShoppingSessionService;
 import com.sd.ecommerce.util.Response;
 
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ShoppingSessionController {
     
-    private final ShoppingSessionServiceImpl shoppingSessionService;
+    private final ShoppingSessionService shoppingSessionService;
     private final UserRepository UserRepository;
 
     @PostMapping("/create")

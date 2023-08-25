@@ -1,4 +1,4 @@
-package com.sd.ecommerce.service.implementation;
+package com.sd.ecommerce.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +13,6 @@ import com.sd.ecommerce.model.User;
 import com.sd.ecommerce.model.UserAddress;
 import com.sd.ecommerce.repository.UserAddressRepository;
 import com.sd.ecommerce.repository.UserRepository;
-import com.sd.ecommerce.service.BaseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,12 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 @Service // This annotation marks this class as a service class. Service classes are classes that contain the business logic of the application.
 @Transactional // This means that every method inside this class will be wrapped in a transaction. Transaction is a set of operations that should be performed as one. If one of the operations fails, then the whole transaction fails.
 @Slf4j
-public class UserAddressServiceImpl implements BaseService<UserAddress>{
+public class UserAddressService{
     
     private final UserAddressRepository userAddressRepository;
     private final UserRepository UserRepository;
 
-    @Override
     public UserAddress save(UserAddress userAddress) {
         log.info("Saving new UserAddress {} to the database", userAddress.getAddressLine());
         
@@ -50,13 +48,11 @@ public class UserAddressServiceImpl implements BaseService<UserAddress>{
         return userAddressRepository.save(newUserAddress);
     }
 
-    @Override
     public UserAddress get(Long id) {
         log.info("Fetching UserAddress {}", id);
         return userAddressRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("UserAddress not found"));
     }
 
-    @Override
     public UserAddress update(Long id, UserAddress userAddress) {
         log.info("Updating UserAddress {} with {}", id, userAddress.toString());
         UserAddress existingUserAddress = userAddressRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("UserAddress not found"));
@@ -68,7 +64,6 @@ public class UserAddressServiceImpl implements BaseService<UserAddress>{
         return userAddressRepository.save(existingUserAddress);
     }
 
-    @Override
     public UserAddress delete(Long id) {
         log.info("Deleting UserAddress {}", id);
         UserAddress existingUserAddress = userAddressRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("UserAddress not found"));
@@ -76,7 +71,6 @@ public class UserAddressServiceImpl implements BaseService<UserAddress>{
         return existingUserAddress;
     }
 
-    @Override
     public Collection<UserAddress> list() {
         log.info("Fetching all UserAddresses");
         return (Collection<UserAddress>) userAddressRepository.findAll();

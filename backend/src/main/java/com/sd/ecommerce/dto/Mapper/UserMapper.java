@@ -64,9 +64,7 @@ public class UserMapper {
 
     // Conversion method from a collection of User entities to a list of UserDTOs
     public List<UserDTO> convertUsersToDTOs(Collection<User> users) {
-        return users.stream()
-                .map(this::convertUserToDTO)
-                .collect(Collectors.toList());
+        return users.stream().map(this::convertUserToDTO).collect(Collectors.toList());
     }
     
 }

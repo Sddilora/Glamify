@@ -3,7 +3,6 @@ package com.sd.ecommerce.model;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -41,7 +40,7 @@ public class Product extends SoftDeletableEntity {
 
     private String description;
 
-    // private String sku; // Stock Keeping Unit
+    private String sku; // Stock Keeping Unit
 
     // Category_id is coming from the ProductCategory table. So we nood to add the relationship between Product and ProductCategory.
     @JoinColumn(name = "category_id") // This is the foreign key
@@ -58,7 +57,7 @@ public class Product extends SoftDeletableEntity {
     @JsonIgnore
     private Discount discountId;
 
-    public Product(@NotNull(message = "Product name is required.") String name, double price, String photoUrl, String description, ProductCategory categoryId, ProductInventory inventoryId, Discount discountId) {
+    public Product(@NotNull(message = "Product name is required.") String name, double price, String photoUrl, String description, ProductCategory categoryId, ProductInventory inventoryId, Discount discountId, String sku) {
         this.name = name;
         this.price = price;
         this.photoUrl = photoUrl;
@@ -66,5 +65,6 @@ public class Product extends SoftDeletableEntity {
         this.categoryId = categoryId;
         this.inventoryId = inventoryId;
         this.discountId = discountId;
+        this.sku = sku;
     }
 }

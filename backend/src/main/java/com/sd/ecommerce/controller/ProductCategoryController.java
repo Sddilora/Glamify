@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sd.ecommerce.model.ProductCategory;
-import com.sd.ecommerce.service.implementation.ProductCategoryServiceImpl;
+import com.sd.ecommerce.service.ProductCategoryService;
 import com.sd.ecommerce.util.Response;
 
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductCategoryController {
     
-    private final ProductCategoryServiceImpl productCategoryService;
+    private final ProductCategoryService productCategoryService;
 
     @PostMapping("/create")
     public ResponseEntity<Response> createProductCategory(@RequestBody @NotNull ProductCategory productCategory) {

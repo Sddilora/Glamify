@@ -14,7 +14,8 @@ import com.sd.ecommerce.model.Discount;
 import com.sd.ecommerce.model.Product;
 import com.sd.ecommerce.model.ProductCategory;
 import com.sd.ecommerce.model.ProductInventory;
-import com.sd.ecommerce.service.BaseService;
+import com.sd.ecommerce.service.ProductCategoryService;
+import com.sd.ecommerce.service.ProductService;
 
 @SpringBootApplication
 public class EcommerceApplication {
@@ -34,12 +35,12 @@ public class EcommerceApplication {
 	}
 
 	@Bean
-	CommandLineRunner runner( BaseService<Product> productService , BaseService<ProductCategory> productCategoryService) { 
+	CommandLineRunner runner( ProductService productService , ProductCategoryService productCategoryService) { 
 		return args -> {
 			productCategoryService.save(productCategory);
 			productCategoryService.save(productCategory2);
-			productService.save(new Product("Product 1", 100.00, "https://via.placeholder.com/200x100", "Description of Product 1", productCategory, null, null));
-			productService.save(new Product("Product 2",200.00, "https://via.placeholder.com/200x100", "Description of Product 2", productCategory2, null , null));
+			productService.save(new Product("Product 1", 100.00, "https://via.placeholder.com/200x100", "Description of Product 1", productCategory, null, null, "SKU-1" ));
+			productService.save(new Product("Product 2",200.00, "https://via.placeholder.com/200x100", "Description of Product 2", productCategory2, null , null, "SKU-2" ));
 		};
 	}
 

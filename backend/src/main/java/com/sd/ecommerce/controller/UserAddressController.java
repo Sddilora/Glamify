@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sd.ecommerce.model.UserAddress;
-import com.sd.ecommerce.service.implementation.UserAddressServiceImpl;
+import com.sd.ecommerce.service.UserAddressService;
 import com.sd.ecommerce.util.Response;
 
 import lombok.RequiredArgsConstructor;
@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserAddressController {
     
-    private final UserAddressServiceImpl userAddressService;
+    private final UserAddressService userAddressService;
 
     @PostMapping("/create")
     public ResponseEntity<Response> createUserAddress(@RequestBody @NotNull UserAddress userAddress) {

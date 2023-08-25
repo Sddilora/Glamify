@@ -1,6 +1,5 @@
 package com.sd.ecommerce.model.Base;
 
-import java.io.Serializable;
 import javax.persistence.MappedSuperclass;
 
 import lombok.Setter;
@@ -13,7 +12,7 @@ import lombok.Getter;
 @Getter
 @Setter
 @MappedSuperclass
-public class SoftDeletableEntity extends BaseEntityAudit  implements Serializable{
+public class SoftDeletableEntity extends BaseEntityAudit{
 
     private boolean deleted = Boolean.FALSE;
 }

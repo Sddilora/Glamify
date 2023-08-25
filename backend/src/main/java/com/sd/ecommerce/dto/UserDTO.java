@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.sd.ecommerce.model.UserAddress;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserDTO {
     
     private String userName;
@@ -20,15 +22,6 @@ public class UserDTO {
     private String lastName;
     private String phone;
     private List<UserAddress> userAddresses = new ArrayList<>();
-
-    public UserDTO(String userName, String email, String firstName, String lastName, String phone, List<UserAddress> userAddresses) {
-        this.userName = userName;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-        this.userAddresses = userAddresses;
-    }
 
     public UserDTO(String userName, String email, String firstName, String lastName, String phone) {
         this.userName = userName;
