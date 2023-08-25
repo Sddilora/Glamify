@@ -4,12 +4,12 @@ import static java.time.LocalDateTime.now;
 import static org.springframework.http.HttpStatus.OK;
 
 import java.util.Map;
-
 import javax.validation.constraints.NotNull;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +34,7 @@ public class UserAddressController {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("userAddress", userAddressService.save(userAddress)))
+            .data(Map.of("createdUserAddress", userAddressService.save(userAddress)))
             .message("User Address created")
             .status(OK)
             .statusCode(OK.value())
@@ -56,7 +56,7 @@ public class UserAddressController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getUserAddress(@NotNull Long id) {
+    public ResponseEntity<Response> getUserAddress(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
@@ -69,7 +69,7 @@ public class UserAddressController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Response> updateUserAddress(@NotNull Long id, @RequestBody @NotNull UserAddress userAddress) {
+    public ResponseEntity<Response> updateUserAddress(@PathVariable("id") Long id, @RequestBody @NotNull UserAddress userAddress) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
@@ -82,7 +82,7 @@ public class UserAddressController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteUserAddress(@NotNull Long id) {
+    public ResponseEntity<Response> deleteUserAddress(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())

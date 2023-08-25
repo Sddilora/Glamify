@@ -4,20 +4,18 @@ import static java.time.LocalDateTime.now;
 import static org.springframework.http.HttpStatus.OK;
 
 import java.util.Map;
-
 import javax.validation.constraints.NotNull;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sd.ecommerce.dto.UserAuthDTO;
-import com.sd.ecommerce.dto.UserDTO;
 import com.sd.ecommerce.dto.UserRegistrationDTO;
 import com.sd.ecommerce.dto.Mapper.UserMapper;
 import com.sd.ecommerce.model.User;
@@ -36,7 +34,9 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<Response> registerUser(@RequestBody UserRegistrationDTO UserRegistrationDTO) {
+
         User user = userService.save(UserMapper.convertToEntity(UserRegistrationDTO)); // Convert DTO to entity
+
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
@@ -76,7 +76,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Response> getUser(@NotNull Long id) {
+    public ResponseEntity<Response> getUser(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
@@ -89,7 +89,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Response> updateUser(@NotNull Long id, @RequestBody @NotNull User user) {
+    public ResponseEntity<Response> updateUser(@PathVariable("id") Long id, @RequestBody @NotNull User user) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
@@ -102,7 +102,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response> deleteUser(@NotNull Long id) {
+    public ResponseEntity<Response> deleteUser(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
