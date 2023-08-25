@@ -10,7 +10,6 @@ import com.sd.ecommerce.dto.UserAuthDTO;
 import com.sd.ecommerce.dto.UserDTO;
 import com.sd.ecommerce.dto.UserRegistrationDTO;
 import com.sd.ecommerce.model.User;
-import com.sd.ecommerce.service.implementation.UserServiceImpl;
 
 @Component
 public class UserMapper {
@@ -55,7 +54,7 @@ public class UserMapper {
 
     // Conversion method from User entity to UserDTO
     public UserDTO convertUserToDTO(User user) {
-        return new UserDTO(user.getUserName(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhone(), user.getUserAddresses());
+        return new UserDTO(user.getUserName(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhone());
     }
 
     // Conversion method from User entity to UserRegistrationDTO

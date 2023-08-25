@@ -1,13 +1,18 @@
 package com.sd.ecommerce.service.implementation;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.ecommerce.exception.ResourceNotFoundException;
+import com.sd.ecommerce.model.User;
 import com.sd.ecommerce.model.UserAddress;
 import com.sd.ecommerce.repository.UserAddressRepository;
+import com.sd.ecommerce.repository.UserRepository;
 import com.sd.ecommerce.service.BaseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,11 +24,30 @@ import lombok.extern.slf4j.Slf4j;
 public class UserAddressServiceImpl implements BaseService<UserAddress>{
     
     private final UserAddressRepository userAddressRepository;
+    private final UserRepository UserRepository;
 
     @Override
     public UserAddress save(UserAddress userAddress) {
-        log.info("Saving new UserAddress {} to the database", userAddress.getId());
-        return userAddressRepository.save(userAddress);
+        log.info("Saving new UserAddress {} to the database", userAddress.getAddressLine());
+        
+        // List<Long> userIds = userAddress.getUserIds();
+        List<Long> userIds = userAddress.getUsers().stream().map(User::getId).collect(Collectors.toList());
+
+        // List<User> users = UserRepository.findAllById(userIds);
+        List<User> users = new ArrayList<User>();
+        for (Long userId : userIds) {
+            User user = UserRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User with provided ID not found"));
+            users.add(user);
+        }
+
+        UserAddress newUserAddress = new UserAddress();
+        newUserAddress.setAddressLine(userAddress.getAddressLine());
+        newUserAddress.setCity(userAddress.getCity());
+        newUserAddress.setCountry(userAddress.getCountry());
+        newUserAddress.setPostalCode(userAddress.getPostalCode());
+        newUserAddress.setUsers(users);
+
+        return userAddressRepository.save(newUserAddress);
     }
 
     @Override

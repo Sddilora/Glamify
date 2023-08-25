@@ -29,4 +29,12 @@ public class UserDTO {
         this.phone = phone;
         this.userAddresses = userAddresses;
     }
+
+    public UserDTO(String userName, String email, String firstName, String lastName, String phone) {
+        this.userName = userName;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+    }
 }
