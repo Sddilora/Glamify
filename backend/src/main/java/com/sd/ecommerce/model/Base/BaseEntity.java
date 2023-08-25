@@ -7,12 +7,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @MappedSuperclass
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 // java.io.Serializable is used to convert the object into a byte stream. It is mainly used to travel the object's state on the network (that is known as marshaling). It is also used to persist the object's state in the database or to save it in a file.
 public abstract class BaseEntity implements Serializable {
 

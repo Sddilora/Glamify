@@ -1,6 +1,7 @@
 package com.sd.ecommerce.model;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -49,7 +50,8 @@ public class Product extends SoftDeletableEntity {
     @JsonIgnore // This is to avoid infinite loop when we get the product list. Because we are getting the category list from the product list and the product list from the category list.
     private ProductCategory categoryId;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "inventory_id", referencedColumnName = "id")
     private ProductInventory inventoryId;
 
     @JoinColumn(name = "discount_id")

@@ -1,7 +1,9 @@
 package com.sd.ecommerce.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -15,7 +17,8 @@ public class OrderItems extends BaseEntity{
     @ManyToOne
     private OrderDetails orderDetails;
 
-    @OneToOne // This is a one to one relationship. One order item can have only one product. ?
+    @OneToOne(cascade = CascadeType.ALL) // This is a one to one relationship. One order item can have only one product. ?
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
     private int quantity;

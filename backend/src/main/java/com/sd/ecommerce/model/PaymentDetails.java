@@ -1,7 +1,9 @@
 package com.sd.ecommerce.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,7 +18,8 @@ import lombok.Setter;
 @Table(name = "payment_details")
 public class PaymentDetails extends BaseEntity{
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_details_id", referencedColumnName = "id")
     private OrderDetails orderDetails;
 
     private int amount;
