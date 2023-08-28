@@ -7,9 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.ecommerce.dto.PaymentDetailsDTO;
 import com.sd.ecommerce.dto.Mapper.PaymentDetailsMapper;
-import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.PaymentDetails;
 import com.sd.ecommerce.repository.PaymentDetailsRepository;
+import com.sd.ecommerce.util.exception.ResourceNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

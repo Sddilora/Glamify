@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sd.ecommerce.dto.ShoppingSessionDTO;
-import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.User;
 import com.sd.ecommerce.repository.UserRepository;
 import com.sd.ecommerce.service.ShoppingSessionService;
 import com.sd.ecommerce.util.Response;
+import com.sd.ecommerce.util.exception.ResourceNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 

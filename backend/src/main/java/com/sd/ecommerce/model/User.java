@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-import com.sd.ecommerce.model.Base.BaseEntity;
 import com.sd.ecommerce.model.Base.BaseEntityAudit;
 
 import lombok.Getter;

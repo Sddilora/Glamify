@@ -2,6 +2,8 @@ package com.sd.ecommerce.service;
 
 import com.sd.ecommerce.repository.UserAddressRepository;
 import com.sd.ecommerce.repository.UserRepository;
+import com.sd.ecommerce.util.exception.ResourceNotFoundException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -12,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.ecommerce.dto.UserDTO;
 import com.sd.ecommerce.dto.UserRegistrationDTO;
-import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.User;
 import com.sd.ecommerce.model.UserAddress;
 import com.sd.ecommerce.dto.Mapper.UserMapper;

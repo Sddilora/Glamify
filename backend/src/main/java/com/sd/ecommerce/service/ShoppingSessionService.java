@@ -1,6 +1,8 @@
 package com.sd.ecommerce.service;
 
 import com.sd.ecommerce.repository.ShoppingSessionRepository;
+import com.sd.ecommerce.util.exception.ResourceNotFoundException;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -8,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.ecommerce.dto.ShoppingSessionDTO;
 import com.sd.ecommerce.dto.Mapper.ShoppingSessionMapper;
-import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.ShoppingSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

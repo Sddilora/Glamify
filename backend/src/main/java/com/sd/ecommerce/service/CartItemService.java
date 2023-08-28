@@ -1,6 +1,5 @@
 package com.sd.ecommerce.service;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -8,9 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.ecommerce.dto.CartItemDTO;
 import com.sd.ecommerce.dto.Mapper.CartItemMapper;
-import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.CartItem;
 import com.sd.ecommerce.repository.CartItemRepository;
+import com.sd.ecommerce.util.exception.ResourceNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

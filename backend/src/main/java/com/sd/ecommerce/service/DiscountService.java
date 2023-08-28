@@ -8,9 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.ecommerce.dto.DiscountDTO;
 import com.sd.ecommerce.dto.Mapper.DiscountMapper;
-import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.Discount;
 import com.sd.ecommerce.repository.DiscountRepository;
+import com.sd.ecommerce.util.exception.ResourceNotFoundException;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

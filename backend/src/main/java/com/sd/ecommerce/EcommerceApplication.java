@@ -14,7 +14,6 @@ import com.sd.ecommerce.dto.ProductCategoryDTO;
 import com.sd.ecommerce.dto.ProductDTO;
 import com.sd.ecommerce.dto.Mapper.ProductCategoryMapper;
 import com.sd.ecommerce.model.Discount;
-import com.sd.ecommerce.model.Product;
 import com.sd.ecommerce.model.ProductCategory;
 import com.sd.ecommerce.model.ProductInventory;
 import com.sd.ecommerce.service.ProductCategoryService;

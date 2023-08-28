@@ -1,7 +1,6 @@
 package com.sd.ecommerce.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,11 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.ecommerce.dto.UserAddressDTO;
 import com.sd.ecommerce.dto.Mapper.UserAddressMapper;
-import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.User;
 import com.sd.ecommerce.model.UserAddress;
 import com.sd.ecommerce.repository.UserAddressRepository;
 import com.sd.ecommerce.repository.UserRepository;
+import com.sd.ecommerce.util.exception.ResourceNotFoundException;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

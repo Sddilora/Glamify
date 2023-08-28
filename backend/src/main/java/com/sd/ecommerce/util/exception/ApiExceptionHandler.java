@@ -1,4 +1,4 @@
-package com.sd.ecommerce.exception;
+package com.sd.ecommerce.util.exception;
 
 import java.util.ArrayList;
 import java.util.List;

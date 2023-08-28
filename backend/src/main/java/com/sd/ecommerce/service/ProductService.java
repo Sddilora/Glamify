@@ -8,9 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sd.ecommerce.dto.ProductDTO;
 import com.sd.ecommerce.dto.Mapper.ProductMapper;
-import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.Product;
 import com.sd.ecommerce.repository.ProductRepository;
+import com.sd.ecommerce.util.exception.ResourceNotFoundException;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
