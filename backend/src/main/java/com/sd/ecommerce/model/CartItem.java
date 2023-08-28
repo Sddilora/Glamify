@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.sd.ecommerce.model.Base.BaseEntity;
+import com.sd.ecommerce.model.Base.BaseEntityAudit;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "cart_item")
-public class CartItem extends BaseEntity{
+public class CartItem extends BaseEntityAudit{
 
     @ManyToOne
     private ShoppingSession shoppingSession;

@@ -5,7 +5,6 @@ import com.sd.ecommerce.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -34,7 +33,7 @@ public class UserService{
     private final UserMapper UserMapper;
 
     // Register a new user
-    public UserRegistrationDTO save(UserRegistrationDTO UserRegistrationDTO) {
+    public UserDTO save(UserRegistrationDTO UserRegistrationDTO) {
         log.info("Saving new User {} to the database", UserRegistrationDTO.getUserName());
         List<Long> userAddressIds = UserRegistrationDTO.getUserAddresses().stream().map(UserAddress::getId).collect(Collectors.toList());
 
@@ -54,7 +53,7 @@ public class UserService{
         newUser.setPhone(UserRegistrationDTO.getPhone());
         newUser.setUserAddresses(userAddresses);
         // user.setPassword(hashPassword(user.getPassword()));
-        return UserMapper.convertRegToDTO(userRepository.save(UserMapper.convertToEntity(UserRegistrationDTO)));
+        return UserMapper.convertUserToDTO(userRepository.save(UserMapper.convertToEntity(UserRegistrationDTO)));
     }
     
     public UserDTO get(Long id) {

@@ -1,10 +1,13 @@
 package com.sd.ecommerce.service;
 
 
-import java.util.Collection;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sd.ecommerce.dto.DiscountDTO;
+import com.sd.ecommerce.dto.Mapper.DiscountMapper;
 import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.Discount;
 import com.sd.ecommerce.repository.DiscountRepository;
@@ -18,36 +21,38 @@ import lombok.extern.slf4j.Slf4j;
 public class DiscountService{
     
     private final DiscountRepository discountRepository;
+    private final DiscountMapper discountMapper;
 
-    public Discount save(Discount discount) {
-        log.info("Saving new Discount {} to the database", discount.getName());
-        return discountRepository.save(discount);
+    public DiscountDTO save(DiscountDTO discountDTO) {
+        log.info("Saving new Discount {} to the database", discountDTO.getId());
+        return discountMapper.convertToDTO(discountRepository.save(discountMapper.convertToEntity(discountDTO)));
     }
 
-    public Discount get(Long id) {
+    public DiscountDTO get(Long id) {
         log.info("Fetching Discount {}", id);
-        return discountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Discount not found"));
+        return discountMapper.convertToDTO(discountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Discount with provided ID not found")));
     }
 
-    public Discount update(Long id, Discount discount) {
-        log.info("Updating Discount {} with {}", id, discount.toString());
-        Discount existingDiscount = discountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Discount not found"));
-        existingDiscount.setName(discount.getName());
-        existingDiscount.setDescription(discount.getDescription());
-        existingDiscount.setDiscount_percent(discount.getDiscount_percent());
-        existingDiscount.set_active(discount.get_active());
-        return discountRepository.save(existingDiscount);
-    }
-
-    public Discount delete(Long id) {
-        log.info("Deleting Discount {}", id);
-        Discount existingDiscount = discountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Discount not found"));
-        discountRepository.deleteById(id);
-        return existingDiscount;
-    }
-
-    public Collection<Discount> list() {
+    public List<DiscountDTO> list() {
         log.info("Fetching all Discounts");
-        return (Collection<Discount>) discountRepository.findAll();
+        return discountMapper.convertToDTO((List<Discount>) discountRepository.findAll());
+    }
+
+    public DiscountDTO update(Long id, DiscountDTO discountDTO) {
+        log.info("Updating Discount {}", id);
+        Discount existingDiscount = discountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Discount with provided ID not found"));
+        existingDiscount.setName(discountDTO.getName());
+        existingDiscount.setDescription(discountDTO.getDescription());
+        existingDiscount.setDiscount_percent(discountDTO.getDiscount_percent());
+        existingDiscount.setActive(discountDTO.isActive());
+        return discountMapper.convertToDTO(discountRepository.save(existingDiscount));
+
+    }
+
+    public DiscountDTO delete(Long id) {
+        log.info("Deleting Discount {}", id);
+        Discount existingDiscount = discountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Discount with provided ID not found"));
+        discountRepository.deleteById(id);
+        return discountMapper.convertToDTO(existingDiscount);
     }
 }

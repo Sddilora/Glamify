@@ -6,7 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.sd.ecommerce.model.Base.BaseEntity;
+import com.sd.ecommerce.model.Base.BaseEntityAudit;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "shopping_session")
-public class ShoppingSession extends BaseEntity{
+public class ShoppingSession extends BaseEntityAudit{
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")

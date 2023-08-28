@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sd.ecommerce.dto.ProductDTO;
-import com.sd.ecommerce.dto.Mapper.ProductMapper;
-import com.sd.ecommerce.model.Product;
 import com.sd.ecommerce.service.ProductService;
 import com.sd.ecommerce.util.Response;
 
@@ -32,14 +30,13 @@ import lombok.RequiredArgsConstructor;
 public class ProductController {
     
     private final ProductService productService;
-    private final ProductMapper ProductMapper;
-
-    @PostMapping("/create")
+    
+    @PostMapping
     public ResponseEntity<Response> createProduct(@RequestBody @NotNull ProductDTO ProductDTO) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("product", ProductMapper.convertToDTO(productService.save(ProductMapper.convertToEntity(ProductDTO)))))
+            .data(Map.of("product", productService.save(ProductDTO)))
             .message("Product created")
             .status(OK)
             .statusCode(OK.value())
@@ -47,12 +44,12 @@ public class ProductController {
         );
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public ResponseEntity<Response> listProducts() {
     return ResponseEntity.ok(
         Response.builder()
         .timeStamp(now())
-        .data(Map.of("products", ProductMapper.convertToDTO(productService.list())))
+        .data(Map.of("products", productService.list()))
         .message("Products retrieved")
         .status(OK)
         .statusCode(OK.value())
@@ -60,12 +57,12 @@ public class ProductController {
     );
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Response> getProduct(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("product", ProductMapper.convertToDTO(productService.get(id))))
+            .data(Map.of("product", productService.get(id)))
             .message("Product retrieved")
             .status(OK)
             .statusCode(OK.value())
@@ -73,12 +70,12 @@ public class ProductController {
         );
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Response> updateProduct(@PathVariable Long id, @RequestBody ProductDTO ProductDTO) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("product", ProductMapper.convertToDTO(productService.update(id, ProductMapper.convertToEntity(ProductDTO)))))
+            .data(Map.of("product", (productService.update(id, ProductDTO))))
             .message("Product updated")
             .status(OK)
             .statusCode(OK.value())
@@ -86,12 +83,12 @@ public class ProductController {
         );
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteProduct(@PathVariable Long id) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("product", ProductMapper.convertToDTO(productService.delete(id))))
+            .data(Map.of("product", (productService.delete(id))))
             .message("Product deleted")
             .status(OK)
             .statusCode(OK.value())

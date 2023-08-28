@@ -6,7 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.sd.ecommerce.model.Base.BaseEntity;
+import com.sd.ecommerce.model.Base.BaseEntityAudit;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "payment_details")
-public class PaymentDetails extends BaseEntity{
+public class PaymentDetails extends BaseEntityAudit{
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_details_id", referencedColumnName = "id")

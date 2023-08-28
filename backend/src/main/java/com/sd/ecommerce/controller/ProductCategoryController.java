@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sd.ecommerce.model.ProductCategory;
+import com.sd.ecommerce.dto.ProductCategoryDTO;
 import com.sd.ecommerce.service.ProductCategoryService;
 import com.sd.ecommerce.util.Response;
 
@@ -30,12 +30,12 @@ public class ProductCategoryController {
     
     private final ProductCategoryService productCategoryService;
 
-    @PostMapping("/create")
-    public ResponseEntity<Response> createProductCategory(@RequestBody @NotNull ProductCategory productCategory) {
+    @PostMapping
+    public ResponseEntity<Response> createProductCategory(@RequestBody @NotNull ProductCategoryDTO productCategoryDTO) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.save(productCategory)))
+            .data(Map.of("productCategory", productCategoryService.save(productCategoryDTO)))
             .message("Product Category created")
             .status(OK)
             .statusCode(OK.value())
@@ -43,7 +43,7 @@ public class ProductCategoryController {
         );
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public ResponseEntity<Response> listProductCategories() {
     return ResponseEntity.ok(
         Response.builder()
@@ -56,7 +56,7 @@ public class ProductCategoryController {
     );
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Response> getProductCategory(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
@@ -69,12 +69,12 @@ public class ProductCategoryController {
         );
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Response> updateProductCategory(@PathVariable("id") Long id, @RequestBody @NotNull ProductCategory productCategory) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Response> updateProductCategory(@PathVariable("id") Long id, @RequestBody @NotNull ProductCategoryDTO productCategoryDTO) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("productCategory", productCategoryService.update(id, productCategory)))
+            .data(Map.of("productCategory", productCategoryService.update(id, productCategoryDTO)))
             .message("Product Category updated")
             .status(OK)
             .statusCode(OK.value())
@@ -82,7 +82,7 @@ public class ProductCategoryController {
         );
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteProductCategory(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()

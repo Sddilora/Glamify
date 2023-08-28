@@ -1,10 +1,13 @@
 package com.sd.ecommerce.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sd.ecommerce.dto.ProductCategoryDTO;
+import com.sd.ecommerce.dto.Mapper.ProductCategoryMapper;
 import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.ProductCategory;
 import com.sd.ecommerce.repository.ProductCategoryRepository;
@@ -18,35 +21,36 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductCategoryService{
 
     private final ProductCategoryRepository productCategoryRepository;
+    private final ProductCategoryMapper productCategoryMapper;
 
-    public ProductCategory save(ProductCategory productCategory) {
-        log.info("Saving new ProductCategory {} to the database", productCategory.getName());
-        return productCategoryRepository.save(productCategory);
+    public ProductCategoryDTO save(ProductCategoryDTO productCategoryDTO) {
+        log.info("Saving new ProductCategory {} to the database", productCategoryDTO.getName());
+        return productCategoryMapper.convertToDTO(productCategoryRepository.save(productCategoryMapper.convertToEntity(productCategoryDTO)));
     }
 
-    public ProductCategory get(Long id) {
+    public ProductCategoryDTO get(Long id) {
         log.info("Fetching ProductCategory {}", id);
-        return productCategoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product Category not found"));
+        return productCategoryMapper.convertToDTO(productCategoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ProductCategory with provided ID not found")));
     }
 
-    public ProductCategory update(Long id, ProductCategory productCategory) {
-        log.info("Updating ProductCategory {} with {}", id, productCategory.toString());
-        ProductCategory existingProductCategory = productCategoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product Category not found"));
-        existingProductCategory.setName(productCategory.getName());
-        existingProductCategory.setDescription(productCategory.getDescription());
-        return productCategoryRepository.save(existingProductCategory);
+    public List<ProductCategoryDTO> list() {
+        log.info("Fetching all ProductCategorys");
+        return productCategoryMapper.convertToDTO((List<ProductCategory>) productCategoryRepository.findAll());
     }
 
-    public ProductCategory delete(Long id) {
+    public ProductCategoryDTO update(Long id, ProductCategoryDTO productCategoryDTO) {
+        log.info("Updating ProductCategory {}", id);
+        ProductCategory existingProductCategory = productCategoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ProductCategory with provided ID not found"));
+        existingProductCategory.setName(productCategoryDTO.getName());
+        existingProductCategory.setDescription(productCategoryDTO.getDescription());
+        return productCategoryMapper.convertToDTO(productCategoryRepository.save(existingProductCategory));
+
+    }
+
+    public ProductCategoryDTO delete(Long id) {
         log.info("Deleting ProductCategory {}", id);
-        ProductCategory existingProductCategory = productCategoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product Category not found"));
+        ProductCategory existingProductCategory = productCategoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ProductCategory with provided ID not found"));
         productCategoryRepository.deleteById(id);
-        return existingProductCategory;
-    }
-
-    public Collection<ProductCategory> list() {
-        log.info("Fetching all Product Categories");
-        return (Collection<ProductCategory>) productCategoryRepository.findAll();
+        return productCategoryMapper.convertToDTO(existingProductCategory);
     }
 }
- 

@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sd.ecommerce.dto.UserAddressDTO;
+import com.sd.ecommerce.dto.Mapper.UserAddressMapper;
 import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.User;
 import com.sd.ecommerce.model.UserAddress;
@@ -24,12 +26,13 @@ public class UserAddressService{
     
     private final UserAddressRepository userAddressRepository;
     private final UserRepository UserRepository;
+    private final UserAddressMapper userAddressMapper;
 
-    public UserAddress save(UserAddress userAddress) {
-        log.info("Saving new UserAddress {} to the database", userAddress.getAddressLine());
+    public UserAddressDTO save(UserAddressDTO userAddressDTO) {
+        log.info("Saving new UserAddress {} to the database", userAddressDTO.getAddressLine());
         
         // List<Long> userIds = userAddress.getUserIds();
-        List<Long> userIds = userAddress.getUsers().stream().map(User::getId).collect(Collectors.toList());
+        List<Long> userIds = userAddressDTO.getUsers().stream().map(User::getId).collect(Collectors.toList());
 
         // List<User> users = UserRepository.findAllById(userIds);
         List<User> users = new ArrayList<User>();
@@ -39,40 +42,40 @@ public class UserAddressService{
         }
 
         UserAddress newUserAddress = new UserAddress();
-        newUserAddress.setAddressLine(userAddress.getAddressLine());
-        newUserAddress.setCity(userAddress.getCity());
-        newUserAddress.setCountry(userAddress.getCountry());
-        newUserAddress.setPostalCode(userAddress.getPostalCode());
+        newUserAddress.setAddressLine(userAddressDTO.getAddressLine());
+        newUserAddress.setCity(userAddressDTO.getCity());
+        newUserAddress.setCountry(userAddressDTO.getCountry());
+        newUserAddress.setPostalCode(userAddressDTO.getPostalCode());
         newUserAddress.setUsers(users);
 
-        return userAddressRepository.save(newUserAddress);
+        return userAddressMapper.convertToDTO(userAddressRepository.save(userAddressMapper.convertToEntity(userAddressDTO)));
     }
 
-    public UserAddress get(Long id) {
+    public UserAddressDTO get(Long id) {
         log.info("Fetching UserAddress {}", id);
-        return userAddressRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("UserAddress not found"));
+        return userAddressMapper.convertToDTO(userAddressRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("UserAddress with provided ID not found")));
     }
 
-    public UserAddress update(Long id, UserAddress userAddress) {
-        log.info("Updating UserAddress {} with {}", id, userAddress.toString());
+    public UserAddressDTO update(Long id, UserAddressDTO userAddressDTO) {
+        log.info("Updating UserAddress {} with {}", id, userAddressDTO.toString());
         UserAddress existingUserAddress = userAddressRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("UserAddress not found"));
-        existingUserAddress.setAddressLine(userAddress.getAddressLine());
-        existingUserAddress.setCity(userAddress.getCity());
-        existingUserAddress.setCountry(userAddress.getCountry());
-        existingUserAddress.setPostalCode(userAddress.getPostalCode());
-        existingUserAddress.setUsers(userAddress.getUsers());
-        return userAddressRepository.save(existingUserAddress);
+        existingUserAddress.setAddressLine(userAddressDTO.getAddressLine());
+        existingUserAddress.setCity(userAddressDTO.getCity());
+        existingUserAddress.setCountry(userAddressDTO.getCountry());
+        existingUserAddress.setPostalCode(userAddressDTO.getPostalCode());
+        existingUserAddress.setUsers(userAddressDTO.getUsers());
+        return userAddressMapper.convertToDTO(userAddressRepository.save(existingUserAddress));
     }
 
-    public UserAddress delete(Long id) {
+    public UserAddressDTO delete(Long id) {
         log.info("Deleting UserAddress {}", id);
         UserAddress existingUserAddress = userAddressRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("UserAddress not found"));
         userAddressRepository.deleteById(id);
-        return existingUserAddress;
+        return userAddressMapper.convertToDTO(existingUserAddress);
     }
 
-    public Collection<UserAddress> list() {
+    public List<UserAddressDTO> list() {
         log.info("Fetching all UserAddresses");
-        return (Collection<UserAddress>) userAddressRepository.findAll();
+        return userAddressMapper.convertToDTO((List<UserAddress>) userAddressRepository.findAll());
     }
 }

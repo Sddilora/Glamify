@@ -46,25 +46,25 @@ public class Product extends SoftDeletableEntity {
     @JoinColumn(name = "category_id") // This is the foreign key
     @ManyToOne
     @JsonIgnore // This is to avoid infinite loop when we get the product list. Because we are getting the category list from the product list and the product list from the category list.
-    private ProductCategory categoryId;
+    private ProductCategory productCategory;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "inventory_id", referencedColumnName = "id")
-    private ProductInventory inventoryId;
+    private ProductInventory productInventory;
 
     @JoinColumn(name = "discount_id")
     @ManyToOne
     @JsonIgnore
-    private Discount discountId;
+    private Discount discount;
 
-    public Product(@NotNull(message = "Product name is required.") String name, double price, String photoUrl, String description, ProductCategory categoryId, ProductInventory inventoryId, Discount discountId, String sku) {
+    public Product(@NotNull(message = "Product name is required.") String name, double price, String photoUrl, String description, ProductCategory productCategory, ProductInventory productInventory, Discount discount, String sku) {
         this.name = name;
         this.price = price;
         this.photoUrl = photoUrl;
         this.description = description;
-        this.categoryId = categoryId;
-        this.inventoryId = inventoryId;
-        this.discountId = discountId;
+        this.productCategory = productCategory;
+        this.productInventory = productInventory;
+        this.discount = discount;
         this.sku = sku;
     }
 }

@@ -1,10 +1,13 @@
 package com.sd.ecommerce.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sd.ecommerce.dto.ProductInventoryDTO;
+import com.sd.ecommerce.dto.Mapper.ProductInventoryMapper;
 import com.sd.ecommerce.exception.ResourceNotFoundException;
 import com.sd.ecommerce.model.ProductInventory;
 import com.sd.ecommerce.repository.ProductInventoryRepository;
@@ -18,33 +21,36 @@ import lombok.extern.slf4j.Slf4j;
 public class ProductInventoryService{
     
     private final ProductInventoryRepository productInventoryRepository;
+    private final ProductInventoryMapper productInventoryMapper;
 
-    public ProductInventory save(ProductInventory productInventory) {
-        log.info("Saving new ProductInventory {} to the database", productInventory.getId());
-        return productInventoryRepository.save(productInventory);
+    public ProductInventoryDTO save(ProductInventoryDTO productInventoryDTO) {
+        log.info("Saving new ProductInventory {} to the database", productInventoryDTO.getId());
+        return productInventoryMapper.convertToDTO(productInventoryRepository.save(productInventoryMapper.convertToEntity(productInventoryDTO)));
     }
 
-    public ProductInventory get(Long id) {
+    public ProductInventoryDTO get(Long id) {
         log.info("Fetching ProductInventory {}", id);
-        return productInventoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product Inventory not found"));
+        return productInventoryMapper.convertToDTO(productInventoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ProductInventory with provided ID not found")));
     }
 
-    public ProductInventory update(Long id, ProductInventory productInventory) {
-        log.info("Updating ProductInventory {} with {}", id, productInventory.toString());
-        ProductInventory existingProductInventory = productInventoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product Inventory not found"));
-        existingProductInventory.setQuantity(productInventory.getQuantity());
-        return productInventoryRepository.save(existingProductInventory);
+    public List<ProductInventoryDTO> list() {
+        log.info("Fetching all ProductInventorys");
+        return productInventoryMapper.convertToDTO((List<ProductInventory>) productInventoryRepository.findAll());
     }
 
-    public ProductInventory delete(Long id) {
+    public ProductInventoryDTO update(Long id, ProductInventoryDTO productInventoryDTO) {
+        log.info("Updating ProductInventory {}", id);
+        ProductInventory existingProductInventory = productInventoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ProductInventory with provided ID not found"));
+        existingProductInventory.setDeleted(productInventoryDTO.isDeleted());
+        existingProductInventory.setQuantity(productInventoryDTO.getQuantity());
+        return productInventoryMapper.convertToDTO(productInventoryRepository.save(existingProductInventory));
+
+    }
+
+    public ProductInventoryDTO delete(Long id) {
         log.info("Deleting ProductInventory {}", id);
-        ProductInventory existingProductInventory = productInventoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product Inventory not found"));
+        ProductInventory existingProductInventory = productInventoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ProductInventory with provided ID not found"));
         productInventoryRepository.deleteById(id);
-        return existingProductInventory;
-    }
-
-    public Collection<ProductInventory> list() {
-        log.info("Fetching all Product Inventories");
-        return (Collection<ProductInventory>) productInventoryRepository.findAll();
+        return productInventoryMapper.convertToDTO(existingProductInventory);
     }
 }

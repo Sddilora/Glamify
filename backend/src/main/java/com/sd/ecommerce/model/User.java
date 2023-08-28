@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.sd.ecommerce.model.Base.BaseEntity;
+import com.sd.ecommerce.model.Base.BaseEntityAudit;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor // Is useful when instances of the class need to be created without providing any initial values for the fields.
 // @AllArgsConstructor // generates a constructor that includes parameters for initializing all fields of the class.
 @Table(name = "users")
-public class User extends BaseEntity{
+public class User extends BaseEntityAudit{
 
     private String userName;
     private String password;

@@ -54,12 +54,12 @@ public class UserMapper {
 
     // Conversion method from User entity to UserDTO
     public UserDTO convertUserToDTO(User user) {
-        return new UserDTO(user.getUserName(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhone());
+        return new UserDTO(user.getId(), user.getCreatedAt(), user.getUpdatedAt(), user.getUserName(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhone(), user.getUserAddresses());
     }
 
     // Conversion method from User entity to UserRegistrationDTO
     public UserRegistrationDTO convertRegToDTO(User user) {
-        return new UserRegistrationDTO(user.getUserName(), user.getPassword(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhone(), user.getUserAddresses());
+        return new UserRegistrationDTO(user.getId(), user.getCreatedAt(), user.getUpdatedAt(), user.getUserName(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getPhone(), user.getUserAddresses(), user.getPassword());
     }
 
     // Conversion method from a collection of User entities to a list of UserDTOs

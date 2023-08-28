@@ -10,6 +10,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import com.sd.ecommerce.dto.ProductCategoryDTO;
+import com.sd.ecommerce.dto.ProductDTO;
+import com.sd.ecommerce.dto.Mapper.ProductCategoryMapper;
 import com.sd.ecommerce.model.Discount;
 import com.sd.ecommerce.model.Product;
 import com.sd.ecommerce.model.ProductCategory;
@@ -20,8 +23,14 @@ import com.sd.ecommerce.service.ProductService;
 @SpringBootApplication
 public class EcommerceApplication {
 
-	ProductCategory productCategory = new ProductCategory("Category 1", "Description of Category 1");
-	ProductCategory productCategory2 = new ProductCategory("Category 2", "Description of Category 2");
+	private final ProductCategoryMapper productCategoryMapper;
+
+	public EcommerceApplication(ProductCategoryMapper productCategoryMapper) { // This is a constructor injection. We are injecting the ProductCategoryMapper bean into this class.
+        this.productCategoryMapper = productCategoryMapper;
+    }
+
+	ProductCategoryDTO productCategory = new ProductCategoryDTO(null,null,null,false,"Category 1", "Description of Category 1");
+	ProductCategoryDTO productCategory2 = new ProductCategoryDTO(null,null,null,false,"Category 2", "Description of Category 2");
 
 	ProductInventory productInventory = new ProductInventory(10);
 	ProductInventory productInventory2 = new ProductInventory(20);
@@ -37,10 +46,10 @@ public class EcommerceApplication {
 	@Bean
 	CommandLineRunner runner( ProductService productService , ProductCategoryService productCategoryService) { 
 		return args -> {
-			productCategoryService.save(productCategory);
-			productCategoryService.save(productCategory2);
-			productService.save(new Product("Product 1", 100.00, "https://via.placeholder.com/200x100", "Description of Product 1", productCategory, null, null, "SKU-1" ));
-			productService.save(new Product("Product 2",200.00, "https://via.placeholder.com/200x100", "Description of Product 2", productCategory2, null , null, "SKU-2" ));
+			ProductCategory savedCategory1 = productCategoryMapper.convertToEntity(productCategoryService.save(productCategory));
+			ProductCategory savedCategory2 = productCategoryMapper.convertToEntity(productCategoryService.save(productCategory2));
+			productService.save(new ProductDTO("Product 1", 100.00, "https://via.placeholder.com/200x100", "Description of Product 1", "SKU-1", savedCategory1, null, null ));
+			productService.save(new ProductDTO("Product 2",200.00, "https://via.placeholder.com/200x100", "Description of Product 2", "SKU-2" , savedCategory2, null , null));
 		};
 	}
 

@@ -26,10 +26,10 @@ public class Discount extends SoftDeletableEntity{
     private String name;
     private String description;
     private float discount_percent;
-    private boolean is_active;
+    private boolean isActive;
 
-    public boolean get_active(){
-        return is_active;
-    }
+    // public boolean get_active(){
+    //     return is_active;
+    // }
 
 }

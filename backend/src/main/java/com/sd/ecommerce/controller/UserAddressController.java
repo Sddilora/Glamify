@@ -16,25 +16,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sd.ecommerce.model.UserAddress;
+import com.sd.ecommerce.dto.UserAddressDTO;
 import com.sd.ecommerce.service.UserAddressService;
 import com.sd.ecommerce.util.Response;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/user-address")
+@RequestMapping("/useraddress")
 @RequiredArgsConstructor
 public class UserAddressController {
     
     private final UserAddressService userAddressService;
 
-    @PostMapping("/create")
-    public ResponseEntity<Response> createUserAddress(@RequestBody @NotNull UserAddress userAddress) {
+    @PostMapping
+    public ResponseEntity<Response> createUserAddress(@RequestBody @NotNull UserAddressDTO userAddressDTO) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("createdUserAddress", userAddressService.save(userAddress)))
+            .data(Map.of("createdUserAddress", userAddressService.save(userAddressDTO)))
             .message("User Address created")
             .status(OK)
             .statusCode(OK.value())
@@ -42,7 +42,7 @@ public class UserAddressController {
         );
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public ResponseEntity<Response> listUserAddresses() {
     return ResponseEntity.ok(
         Response.builder()
@@ -55,7 +55,7 @@ public class UserAddressController {
     );
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Response> getUserAddress(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
@@ -68,12 +68,12 @@ public class UserAddressController {
         );
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Response> updateUserAddress(@PathVariable("id") Long id, @RequestBody @NotNull UserAddress userAddress) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Response> updateUserAddress(@PathVariable("id") Long id, @RequestBody @NotNull UserAddressDTO userAddressDTO) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("userAddress", userAddressService.update(id, userAddress)))
+            .data(Map.of("userAddress", userAddressService.update(id, userAddressDTO)))
             .message("User Address updated")
             .status(OK)
             .statusCode(OK.value())
@@ -81,7 +81,7 @@ public class UserAddressController {
         );
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteUserAddress(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()

@@ -15,20 +15,21 @@ public class ProductMapper {
     // Conversion method from ProductDTO to Product entity
     public Product convertToEntity(ProductDTO productDTO) {
         Product product = new Product();
+        product.setId(productDTO.getId());
         product.setName(productDTO.getName());
         product.setPrice(productDTO.getPrice());
         product.setPhotoUrl(productDTO.getPhotoUrl());
         product.setDescription(productDTO.getDescription());
         product.setSku(productDTO.getSku());
-        product.setCategoryId(productDTO.getCategoryId());
-        product.setInventoryId(productDTO.getInventoryId());
-        product.setDiscountId(productDTO.getDiscountId());
+        product.setProductCategory(productDTO.getProductCategory());
+        product.setProductInventory(productDTO.getProductInventory());
+        product.setDiscount(productDTO.getDiscount());
         return product;
     }
 
     // Conversion method from Product entity to ProductDTO
     public ProductDTO convertToDTO(Product product) {
-        return new ProductDTO(product.getName(), product.getPrice(), product.getPhotoUrl(), product.getDescription(), product.getSku(), product.getCategoryId(), product.getInventoryId(), product.getDiscountId());
+        return new ProductDTO(product.getId(), product.getCreatedAt(), product.getUpdatedAt(),product.isDeleted(), product.getName(), product.getPrice(), product.getPhotoUrl(), product.getDescription(), product.getSku(), product.getProductCategory(), product.getProductInventory(), product.getDiscount());
     }
 
     public List<ProductDTO> convertToDTO(Collection<Product> products) {

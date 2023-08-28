@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sd.ecommerce.dto.ShoppingSessionDTO;
 import com.sd.ecommerce.exception.ResourceNotFoundException;
-import com.sd.ecommerce.model.ShoppingSession;
 import com.sd.ecommerce.model.User;
 import com.sd.ecommerce.repository.UserRepository;
 import com.sd.ecommerce.service.ShoppingSessionService;
@@ -28,17 +28,17 @@ import com.sd.ecommerce.util.Response;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/shopping-session")
+@RequestMapping("/shoppingsession")
 @RequiredArgsConstructor
 public class ShoppingSessionController {
     
     private final ShoppingSessionService shoppingSessionService;
     private final UserRepository UserRepository;
 
-    @PostMapping("/create")
-    public ResponseEntity<Response> createShoppingSession(@RequestBody ShoppingSession shoppingSession) {
+    @PostMapping
+    public ResponseEntity<Response> createShoppingSession(@RequestBody ShoppingSessionDTO shoppingSessionDTO) {
         
-        Long userId = shoppingSession.getUser().getId();
+        Long userId = shoppingSessionDTO.getUser().getId();
 
         if (userId == null) {
             return ResponseEntity.badRequest().body(
@@ -53,11 +53,11 @@ public class ShoppingSessionController {
 
         User user = UserRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User with provided ID not found"));
         
-        ShoppingSession newShoppingSession = new ShoppingSession();
-        newShoppingSession.setUser(user);
-        newShoppingSession.setTotal(shoppingSession.getTotal());
+        ShoppingSessionDTO newShoppingSessionDTO = new ShoppingSessionDTO();
+        newShoppingSessionDTO.setUser(user);
+        newShoppingSessionDTO.setTotal(shoppingSessionDTO.getTotal());
 
-        ShoppingSession createdSession = shoppingSessionService.save(newShoppingSession);
+        ShoppingSessionDTO createdSession = shoppingSessionService.save(newShoppingSessionDTO);
 
         return ResponseEntity.ok(
             Response.builder()
@@ -71,7 +71,7 @@ public class ShoppingSessionController {
     }
 
 
-    @GetMapping("/list")
+    @GetMapping
     public ResponseEntity<Response> listShoppingSessions() {
     return ResponseEntity.ok(
         Response.builder()
@@ -84,7 +84,7 @@ public class ShoppingSessionController {
     );
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Response> getShoppingSession(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()
@@ -97,12 +97,12 @@ public class ShoppingSessionController {
         );
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Response> updateShoppingSession(@PathVariable("id") Long id, @RequestBody @NotNull ShoppingSession shoppingSession) {
+    @PutMapping("/{id}")
+    public ResponseEntity<Response> updateShoppingSession(@PathVariable("id") Long id, @RequestBody @NotNull ShoppingSessionDTO shoppingSessionDTO) {
         return ResponseEntity.ok(
             Response.builder()
             .timeStamp(now())
-            .data(Map.of("shoppingSession", shoppingSessionService.update(id, shoppingSession)))
+            .data(Map.of("shoppingSession", shoppingSessionService.update(id, shoppingSessionDTO)))
             .message("Shopping Session updated")
             .status(OK)
             .statusCode(OK.value())
@@ -110,7 +110,7 @@ public class ShoppingSessionController {
         );
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteShoppingSession(@PathVariable("id") Long id) {
         return ResponseEntity.ok(
             Response.builder()

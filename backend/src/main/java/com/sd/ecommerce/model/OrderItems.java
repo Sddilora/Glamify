@@ -7,11 +7,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.sd.ecommerce.model.Base.BaseEntity;
+import com.sd.ecommerce.model.Base.BaseEntityAudit;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "order_items")
-public class OrderItems extends BaseEntity{
+public class OrderItems extends BaseEntityAudit{
 
     @ManyToOne
     private OrderDetails orderDetails;

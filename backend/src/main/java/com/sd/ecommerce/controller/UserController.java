@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sd.ecommerce.dto.UserDTO;
 import com.sd.ecommerce.dto.UserRegistrationDTO;
 import com.sd.ecommerce.service.UserService;
 import com.sd.ecommerce.util.Response;
@@ -32,7 +33,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<Response> registerUser(@RequestBody UserRegistrationDTO UserRegistrationDTO) {
 
-        UserRegistrationDTO user = userService.save(UserRegistrationDTO); // Convert DTO to entity
+        UserDTO user = userService.save(UserRegistrationDTO); // Convert DTO to entity
 
         return ResponseEntity.ok(
             Response.builder()

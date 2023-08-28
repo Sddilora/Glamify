@@ -1,5 +1,6 @@
 package com.sd.ecommerce.dto;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
+
+    // BaseEntity
+    private Long id;
+    // BaseEntityAudit
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
     
     private String userName;
     private String email;
@@ -23,7 +30,10 @@ public class UserDTO {
     private String phone;
     private List<UserAddress> userAddresses = new ArrayList<>();
 
-    public UserDTO(String userName, String email, String firstName, String lastName, String phone) {
+    public UserDTO(Long id, Timestamp createdAt, Timestamp updatedAt, String userName, String email, String firstName, String lastName, String phone) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.userName = userName;
         this.email = email;
         this.firstName = firstName;

@@ -6,6 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserAuthDTO {
+
+    // BaseEntity
+    private Long id;
         
     private String email;
     private String password;

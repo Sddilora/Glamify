@@ -10,10 +10,12 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @MappedSuperclass
 public abstract class BaseEntityAudit extends BaseEntity{
 
@@ -41,6 +43,11 @@ public abstract class BaseEntityAudit extends BaseEntity{
     @Override
     public String toString() {
         return "BaseEntityAudit {" + "createdAt = " + createdAt + ", updatedAt = " + updatedAt + "}";
+    }
+
+    // for the child class to use id
+    public BaseEntityAudit(Long id) {
+        super(id);
     }
 
 }
