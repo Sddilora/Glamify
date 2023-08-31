@@ -27,3 +27,5 @@ public class UserAddress extends BaseEntity{
     private List<User> users = new ArrayList<>();
 
 }
+
+// TODO add adress header ( home, work etc)  

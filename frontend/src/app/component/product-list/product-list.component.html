@@ -1,0 +1,20 @@
+<div id="mainContainer">
+  <h1 id="heading" style="color: rgb(37, 97, 111); ">Products</h1>
+  <div id="productContainer">
+    <div *ngFor="let product of products">
+      <div id="box">
+      <a [routerLink]="['/product', product.id]">
+        <img [src]="product.photoUrl" alt="product" />
+          <div id="details" class="productInfo">
+          <p class="productName">{{ product.name }}</p>
+          <p class="productPrice">{{ product.price }} $</p>
+          <p class="productDescription" style="    display: -webkit-box;
+          -webkit-line-clamp: 2; /* Number of lines to show */
+          -webkit-box-orient: vertical;
+          overflow: hidden;">{{ product.description }}</p>
+        </div>
+        </a>
+    </div>
+  </div>
+</div>
+</div>

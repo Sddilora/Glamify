@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  width: 100%;
+  height: 100%;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}

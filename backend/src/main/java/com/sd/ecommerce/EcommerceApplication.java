@@ -13,6 +13,7 @@ import org.springframework.web.filter.CorsFilter;
 import com.sd.ecommerce.dto.ProductCategoryDTO;
 import com.sd.ecommerce.dto.ProductDTO;
 import com.sd.ecommerce.dto.Mapper.ProductCategoryMapper;
+import com.sd.ecommerce.enumeration.ProductCategories;
 import com.sd.ecommerce.model.Discount;
 import com.sd.ecommerce.model.ProductCategory;
 import com.sd.ecommerce.model.ProductInventory;
@@ -28,8 +29,8 @@ public class EcommerceApplication {
         this.productCategoryMapper = productCategoryMapper;
     }
 
-	ProductCategoryDTO productCategory = new ProductCategoryDTO(null,null,null,false,"Category 1", "Description of Category 1");
-	ProductCategoryDTO productCategory2 = new ProductCategoryDTO(null,null,null,false,"Category 2", "Description of Category 2");
+	ProductCategoryDTO productCategory = new ProductCategoryDTO(null,null,null,false, ProductCategories.BABY, "Description of Category 1");
+	ProductCategoryDTO productCategory2 = new ProductCategoryDTO(null,null,null,false, ProductCategories.BEAUTY, "Description of Category 2");
 
 	ProductInventory productInventory = new ProductInventory(10);
 	ProductInventory productInventory2 = new ProductInventory(20);

@@ -2,6 +2,8 @@ package com.sd.ecommerce.dto;
 
 import java.sql.Timestamp;
 
+import com.sd.ecommerce.enumeration.ProductCategories;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +23,7 @@ public class ProductCategoryDTO {
     // SoftDeletableEntity
     private boolean deleted;
     
-    private String name;
+    private ProductCategories name;
     private String description;
 
 }

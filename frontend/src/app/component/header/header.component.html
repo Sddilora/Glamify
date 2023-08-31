@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <header>
+
+      <section>
+        <!-- MAIN CONTAINER -->
+        <div id="container" style="grid-template-columns: 1.5fr 24fr 1.5fr 0.5fr;">
+                      <!-- SHOP NAME -->
+          <div id="shopName">
+            <a href="#" > <b>GLAM</b>IFY </a>
+          </div>
+
+          <!-- SEARCH SECTION -->
+          <div id="search">
+            <i class="fas fa-search search" style='color:rgb(45, 118, 136)'></i>
+            <input
+              type="text"
+              id="input"
+              name="searchBox"
+              placeholder="Type the product, category or brand you are looking for"
+              style="-webkit-text-fill-color: rgba(115, 113, 128, 0.753); font-size: 15px;"
+            />
+          </div>
+          <!-- USER SECTION (CART AND USER ICON) -->
+          <div id="user">
+            <a href="products"><i class='fas fa-heart' style='font-size:27px;color:rgba(45, 118, 136, 0.836);margin-right: 20px;'></i>
+
+            </a>
+            <a href="#">
+              <i class="fas fa-shopping-cart addedToCart " style='color:rgb(45, 118, 136)'><div id="badge" style="margin-right: -40px;margin-top:3px;background-color:darkgray">0</div></i></a>
+            <a href="#"> <i class="fas fa-user-circle userIcon" style='font-size:30px;color:rgb(45, 118, 136)'></i> </a>
+          </div>
+
+          <br/>
+          <br/>
+        </div>
+        <div id="container" style="margin-top: 85px;grid-template-columns: 1.5fr 1.5fr 1.5fr 1.5fr;">
+              <!-- COLLCETIONS ON WEBSITE -->
+              <div *ngFor="let main_menu_navigation of mainmenus()" >
+                <div id="navbar" ><a href="#" style="color: rgb(45, 118, 136);text-decoration: none;font-weight: 600;"> {{ main_menu_navigation }} </a>
+              </div>
+              </div>
+        </div>
+
+      </section>
+    </header>
+  </body>
+</html>

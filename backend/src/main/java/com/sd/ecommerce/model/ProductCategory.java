@@ -6,6 +6,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.sd.ecommerce.enumeration.ProductCategories;
 import com.sd.ecommerce.model.Base.SoftDeletableEntity;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +24,6 @@ import lombok.Setter;
 @Where(clause = "deleted=false")
 public class ProductCategory extends SoftDeletableEntity{
 
-    private String name;
+    private ProductCategories name;
     private String description;
 }
