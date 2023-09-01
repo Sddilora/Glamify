@@ -48,8 +48,8 @@ public class EcommerceApplication {
 		return args -> {
 			ProductCategory savedCategory1 = productCategoryMapper.convertToEntity(productCategoryService.save(productCategory));
 			ProductCategory savedCategory2 = productCategoryMapper.convertToEntity(productCategoryService.save(productCategory2));
-			productService.save(new ProductDTO("Product 1", 100.00, "https://via.placeholder.com/200x100", "Description of Product 1", "SKU-1", savedCategory1, null, null ));
-			productService.save(new ProductDTO("Product 2",200.00, "https://via.placeholder.com/200x100", "Description of Product 2", "SKU-2" , savedCategory2, null , null));
+			productService.save(new ProductDTO("Nicon Camera", 10000.00, "https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg?auto=compress&cs=tinysrgb&w=1600", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec molestie bibendum pellentesque. Curabitur mauris quam, varius ut lorem ac, tempus suscipit nunc. Nullam auctor, odio a cursus elementum, eros est rutrum urna, et gravida arcu eros eget sapien. Nulla molestie nunc nibh, sed pharetra odio condimentum ut.", "SKU-1", savedCategory1, null, null ));
+			productService.save(new ProductDTO("Lavander Soap",15.00, "https://images.pexels.com/photos/4210374/pexels-photo-4210374.jpeg?auto=compress&cs=tinysrgb&w=600", "It smells very well", "SKU-2" , savedCategory2, null , null));
 		};
 	}
 
@@ -58,7 +58,7 @@ public class EcommerceApplication {
 		UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowCredentials(true);
-		corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:4200"));
+		corsConfiguration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:4200", "http://localhost:58705", "http://localhost"));
 		corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
 				"Accept", "Jwt-Token", "Authorization", "Origin, Accept", "X-Requested-With",
 				"Access-Control-Request-Method", "Access-Control-Request-Headers"));

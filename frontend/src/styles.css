@@ -8,3 +8,54 @@ body {
 body::-webkit-scrollbar {
   display: none;  /* Safari and Chrome */
 }
+
+/* Navigation links */
+#nav {
+  list-style:none inside;
+  margin:0;
+  padding:0;
+  text-align:center;
+  background-color: white;
+  margin: auto;
+  text-align: center;
+  width:98%;
+  display: grid;
+  grid-gap: 10px;
+  font-family: 'Lato', sans-serif;
+  z-index: 1;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  box-sizing: border-box;
+  position: fixed;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+  }
+  #nav li {
+  display:block;
+  position:relative;
+  float:left;
+  background: #24af15; /* menu background color */
+  }
+  #nav li a {
+  display:block;
+  padding:0;
+  text-decoration:none;
+  width:200px; /* this is the width of the menu items */
+  line-height:35px; /* this is the hieght of the menu items */
+  color:#742a2a; /* list item font color */
+  }
+  #nav li li a {font-size:80%;} /* smaller font size for sub menu items */
+  #nav li:hover {background:#003f20;} /* highlights current hovered list item and the parent list items when hovering over sub menues */
+  #nav ul {
+  position:absolute;
+  padding:0;
+  left:0;
+  display:none; /* hides sublists */
+  }
+  #nav li:hover ul ul {display:none;} /* hides sub-sublists */
+  #nav li:hover ul {display:block;} /* shows sublist on hover */
+  #nav li li:hover ul {
+  display:block; /* shows sub-sublist on hover */
+  margin-left:200px; /* this should be the same width as the parent list item */
+  margin-top:-35px; /* aligns top of sub menu with top of list item */
+  }

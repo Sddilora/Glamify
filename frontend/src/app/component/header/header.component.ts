@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { FirstLevelMenu, SecondLevelElectronicsMenu, SecondLevelFashionMenu, SecondLevelHomeMenu, SecondLevelSportsMenu } from 'src/app/interface/navbar-menus';
-
+import { NAVBAR_MENUS, NavbarMenu } from 'src/app/interface/navbar-menus';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -8,30 +7,24 @@ import { FirstLevelMenu, SecondLevelElectronicsMenu, SecondLevelFashionMenu, Sec
 })
 export class HeaderComponent {
 
-  mainMenu = FirstLevelMenu;
-  homeMenus = SecondLevelHomeMenu;
-  electronicsMenus = SecondLevelElectronicsMenu;
-  fashionMenus = SecondLevelFashionMenu;
-  sportsMenus = SecondLevelSportsMenu;
+  mainMenus = NAVBAR_MENUS;
 
   mainmenus() : Array<string> {
-    return Object.keys(this.mainMenu);
+    return Object.values(this.mainMenus.map(menu => menu.name));
   }
 
-  homemenus() : Array<string> {
-    return Object.keys(this.homeMenus);
-  }
+  // submenus(menuName: string) : Array<string> {
+  //   return this.mainMenus.find(menu => menu.name === menuName).submenus.map(submenu => submenu.name);
+  // } // Object is possibly 'undefined'.ts(2532)
+  // // Object is possibly 'undefined
 
-  electronicsmenus() : Array<string> {
-    return Object.keys(this.electronicsMenus);
+  // return Array<string> or undefined
+  submenus(menuName: string) : Array<string> | undefined {
+    // due to above error, we need to check if the menuName is undefined
+    if (this.mainMenus.find(menu => menu.name === menuName)?.submenus) {
+      return this.mainMenus.find(menu => menu.name === menuName)?.submenus?.map(submenu => submenu.name);
+    } else {
+      return [];
+    }
   }
-
-  fashionmenus() : Array<string> {
-    return Object.keys(this.fashionMenus);
-  }
-
-  sportsmenus() : Array<string> {
-    return Object.keys(this.sportsMenus);
-  }
-
 }

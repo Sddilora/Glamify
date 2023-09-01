@@ -10,8 +10,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.Where;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sd.ecommerce.model.Base.SoftDeletableEntity;
 
@@ -38,6 +38,7 @@ public class Product extends SoftDeletableEntity {
 
     private String photoUrl;
 
+    @Type(type = "org.hibernate.type.TextType")
     private String description;
 
     private String sku; // Stock Keeping Unit

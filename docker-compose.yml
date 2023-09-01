@@ -27,8 +27,8 @@ services:
       - "8191:8191" # the first port is the port on the host machine, the second is the port in the container
     depends_on:
       - ecommerce-db
-    volumes:
-      - ./backend:/app
+    # volumes:
+    #   - ./backend:/app
     links:
       - ecommerce-db
 
@@ -36,10 +36,10 @@ services:
   #   build: ./frontend
   #   container_name: ecommerce-frontend
   #   ports:
-  #     - "4200:4200"
+  #     - "4200:80"
   #   depends_on:
   #     - ecommerce-db
-  #   volumes:
-  #     - ./frontend:/app
+  #   # volumes:
+  #     # - ./frontend:/app
   #   links:
   #     - ecommerce-backend

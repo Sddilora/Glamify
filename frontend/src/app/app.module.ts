@@ -12,8 +12,6 @@ import { FooterComponent } from './component/footer/footer.component';
 
 
 const routes: Routes = [
-  { path: 'products', component: ProductListComponent },
-  { path: 'cart-details', component: CartDetailsComponent },
 ];
 
 @NgModule({
@@ -25,7 +23,7 @@ const routes: Routes = [
     FooterComponent
   ],
   imports: [
-    RouterModule.forRoot(routes),
+    // RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule

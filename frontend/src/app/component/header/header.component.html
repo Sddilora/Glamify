@@ -33,9 +33,12 @@
         </div>
         <div id="container" style="margin-top: 85px;grid-template-columns: 1.5fr 1.5fr 1.5fr 1.5fr;">
               <!-- COLLCETIONS ON WEBSITE -->
-              <div *ngFor="let main_menu_navigation of mainmenus()" >
-                <div id="navbar" ><a href="#" style="color: rgb(45, 118, 136);text-decoration: none;font-weight: 600;"> {{ main_menu_navigation }} </a>
-              </div>
+              <div *ngFor="let navbar of mainmenus()" >
+                <div id="navbar" ><a href="#" style="color: rgb(45, 118, 136);text-decoration: none;font-weight: 600;"> {{ navbar }} </a>
+                  <!-- <div *ngFor="let subnavbar of submenus(navbar)">
+                    <div id="sub-navbar"><a href="#">{{subnavbar}}</a></div>
+                  </div> -->
+                </div>
               </div>
         </div>
 

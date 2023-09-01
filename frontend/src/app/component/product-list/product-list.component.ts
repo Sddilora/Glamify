@@ -12,12 +12,10 @@ export class ProductListComponent implements OnInit{
 
   products: Product[] = [];
 
-  constructor( private productService: ProductService, private route: ActivatedRoute ) { }
+  constructor( private productService: ProductService ) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(() => {
-      this.listProducts();
-    });
+    this.listProducts();
   }
 
   listProducts() {
