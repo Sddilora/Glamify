@@ -1,4 +1,4 @@
-![transparent-placeholder](https://imgur.com/8jg9r15.png)![Logo](https://imgur.com/1Bxir7j.png)
+![transparent-placeholder](https://imgur.com/yhXhFEt.png)![Logo](https://imgur.com/1Bxir7j.png)
 
 A web application built with Spring Boot and Angular, deployed using Docker Compose.
 
