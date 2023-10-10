@@ -48,7 +48,7 @@ public class EcommerceApplication {
 		return args -> {
 			ProductCategory savedCategory1 = productCategoryMapper.convertToEntity(productCategoryService.save(productCategory));
 			ProductCategory savedCategory2 = productCategoryMapper.convertToEntity(productCategoryService.save(productCategory2));
-			productService.save(new ProductDTO("Nicon Camera", 10000.00, "https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg?auto=compress&cs=tinysrgb&w=1600", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec molestie bibendum pellentesque. Curabitur mauris quam, varius ut lorem ac, tempus suscipit nunc. Nullam auctor, odio a cursus elementum, eros est rutrum urna, et gravida arcu eros eget sapien. Nulla molestie nunc nibh, sed pharetra odio condimentum ut.", "SKU-1", savedCategory1, null, null ));
+			productService.save(new ProductDTO("Nikon Camera", 10000.00, "https://images.pexels.com/photos/3907507/pexels-photo-3907507.jpeg?auto=compress&cs=tinysrgb&w=1600", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec molestie bibendum pellentesque. Curabitur mauris quam, varius ut lorem ac, tempus suscipit nunc. Nullam auctor, odio a cursus elementum, eros est rutrum urna, et gravida arcu eros eget sapien. Nulla molestie nunc nibh, sed pharetra odio condimentum ut.", "SKU-1", savedCategory1, null, null ));
 			productService.save(new ProductDTO("Lavander Soap",15.00, "https://images.pexels.com/photos/4210374/pexels-photo-4210374.jpeg?auto=compress&cs=tinysrgb&w=600", "It smells very well", "SKU-2" , savedCategory2, null , null));
 		};
 	}

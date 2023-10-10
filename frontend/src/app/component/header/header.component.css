@@ -19,7 +19,6 @@
     font-family: 'Lato', sans-serif;
     z-index: 1;
     justify-content: space-between;
-    align-items: center;
     padding: 15px 40px;
     box-sizing: border-box;
     position: fixed;
@@ -33,7 +32,7 @@
 #shopName a
 {
     text-decoration: none;
-    color: rgb(37, 150, 106);
+    color: #c77810;
 }
 #shopName b
 {
@@ -101,6 +100,45 @@
     color: rgb(29, 29, 29)
 }
 
+#navbar:hover  > .sub-navbar-menu,
+#navbar:focus-within > .sub-navbar-menu,
+.sub-navbar-menu:hover,
+.sub-navbar-menu:focus
+{
+    visibility: visible;
+    display: block;
+    position: absolute;
+    background-color: white;
+    width: 25%;
+    z-index: 1;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+    text-align: left;
+    text-decoration: none;
+    padding: 20px;
+    opacity: 1;
+    text-indent: 0.2em;
+        line-height: 1.5em;
+        /* transition: all 5s ease-in-out; */
+        transition-duration: 0.5s;
+}
+
+.sub-navbar-menu a
+{
+    color: #c77810;
+    text-decoration: none;
+    font-weight: 600;
+}
+.sub-navbar-menu
+{
+    visibility: hidden;
+    display: none;
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
+}
+.sub-navbar-menu a:hover
+{
+    color: rgb(45, 118, 136);
+}
 /* ----------------------------- MEDIA QUERY --------------------------- */
 
 @media(max-width: 1300px)

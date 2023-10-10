@@ -20,7 +20,7 @@
           </div>
           <!-- USER SECTION (CART AND USER ICON) -->
           <div id="user">
-            <a href="products"><i class='fas fa-heart' style='font-size:27px;color:rgba(45, 118, 136, 0.836);margin-right: 20px;'></i>
+            <a href="products"><i class='fas fa-heart' style='font-size:27px;color:rgb(45, 118, 136);margin-right: 20px;'></i>
 
             </a>
             <a href="#">
@@ -31,13 +31,15 @@
           <br/>
           <br/>
         </div>
-        <div id="container" style="margin-top: 85px;grid-template-columns: 1.5fr 1.5fr 1.5fr 1.5fr;">
+        <div id="container" style="margin-top: 85px;grid-template-columns: 1.5fr 1.5fr 1.5fr 1.5fr;padding: 10px; align-items: center;">
               <!-- COLLCETIONS ON WEBSITE -->
-              <div *ngFor="let navbar of mainmenus()" >
+              <div *ngFor="let navbar of mainmenus()">
                 <div id="navbar" ><a href="#" style="color: rgb(45, 118, 136);text-decoration: none;font-weight: 600;"> {{ navbar }} </a>
-                  <!-- <div *ngFor="let subnavbar of submenus(navbar)">
-                    <div id="sub-navbar"><a href="#">{{subnavbar}}</a></div>
-                  </div> -->
+                  <div class="sub-navbar-menu">
+                    <div *ngFor="let subnavbar of submenus(navbar)">
+                      <div id="sub-navbar"><a href="#">{{subnavbar}}</a></div>
+                    </div>
+                  </div>
                 </div>
               </div>
         </div>

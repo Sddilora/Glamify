@@ -7,7 +7,7 @@ services:
     image: "postgres:15.0-alpine"
     container_name: ecommerce-db
     ports:
-      - "5432:5432" 
+      - "5431:5432" 
     environment:
       - POSTGRES_DB=ecommerce
       - POSTGRES_USER=ecommerce
