@@ -32,14 +32,14 @@ services:
     links:
       - ecommerce-db
 
-  # ecommerce-frontend:
-  #   build: ./frontend
-  #   container_name: ecommerce-frontend
-  #   ports:
-  #     - "4200:80"
-  #   depends_on:
-  #     - ecommerce-db
-  #   # volumes:
-  #     # - ./frontend:/app
-  #   links:
-  #     - ecommerce-backend
+  ecommerce-frontend:
+    build: ./frontend
+    container_name: ecommerce-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - ecommerce-db
+    # volumes:
+      # - ./frontend:/app
+    links:
+      - ecommerce-backend
