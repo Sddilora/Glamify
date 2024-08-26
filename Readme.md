@@ -52,6 +52,13 @@ Before you begin, ensure you have the following:
    docker-compose up
    ```
 
+4. Check out what's happening at http://localhost:4200/
+
+![image](https://github.com/user-attachments/assets/5eedcfa7-13f8-403c-9030-82439879c313)
+
+![Screenshot from 2024-08-26 13-58-30](https://github.com/user-attachments/assets/3f59bfae-6747-4344-88ff-21bc90d8ac61)
+
+
 ## Usage
 
 - Customize the frontend and backend according to your project requirements.
